@@ -100,27 +100,31 @@ def transform_image_with_random_position(base64_string):
         image_data = base64.b64decode(base64_string)
         image = Image.open(io.BytesIO(image_data))
 
-        # Get image dimensions
+        # Get original image dimensions
         width, height = image.size
-
-        # Create new canvas (double the original size)
-        new_width = width * 2
-        new_height = height * 2
-        canvas = Image.new('RGB', (new_width, new_height), 'white')
-
-        # Calculate center position
-        center_x = (new_width - width) // 2
-        center_y = (new_height - height) // 2
 
         # Random rotation angle (-10 to +10 degrees)
         rotation_angle = random.uniform(-10, 10)
 
-        # Random horizontal shift (normal distribution)
-        horizontal_shift = np.random.normal(loc=10, scale=5)
+        # Rotate image to get its new dimensions
+        rotated_image = image.rotate(rotation_angle, expand=True)
+        rotated_width, rotated_height = rotated_image.size
 
-        # Paste and rotate image
-        rotated_image = image.rotate(rotation_angle, expand=False)
-        canvas.paste(rotated_image, (int(center_x + horizontal_shift), center_y))
+        # Create new canvas (with extra margins)
+        margin = 50  # Extra margin
+        new_width = rotated_width + 2 * margin
+        new_height = rotated_height + 2 * margin
+        canvas = Image.new('RGB', (new_width, new_height), 'white')
+
+        # Calculate center position with margin
+        center_x = margin + (new_width - rotated_width) // 2
+        center_y = margin + (new_height - rotated_height) // 2
+
+        # Random horizontal shift (normal distribution)
+        horizontal_shift = np.random.normal(loc=0, scale=5)
+
+        # Paste rotated image onto the canvas
+        canvas.paste(rotated_image, (int(center_x + horizontal_shift), int(center_y)))
 
         # Convert to JPEG base64 encoding
         buffer = io.BytesIO()
@@ -130,7 +134,9 @@ def transform_image_with_random_position(base64_string):
         return result_base64
 
     except Exception as e:
-        return f"Error processing image: {str(e)}"
+        print(f"Error: {e}")
+        return None
+
 
 def judge_correct(gpt, label):
     if gpt == '':
@@ -159,12 +165,20 @@ def judge_correct(gpt, label):
         return False
     return False
 
-def show_pic(base64_str):
-    image_data = base64.b64decode(base64_str)
+def show_pic(base64_string):
+    # 解码Base64字符串
+    image_data = base64.b64decode(base64_string)
 
+    # 将解码后的数据转换为PIL图像
     image = Image.open(BytesIO(image_data))
 
-    display(image)
+    # 转换为numpy数组
+    image_array = np.array(image)
+
+    # 使用matplotlib展示图片
+    plt.imshow(image_array)
+    plt.axis('off')  # 不显示坐标轴
+    plt.show()
 
 @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(_MAX_TRY))
 def chat(payload):
@@ -287,7 +301,7 @@ def do_one_test(test_meta, test_mode, use_example, use_cot, test_prefix, use_rev
             image_base64 = process_image_from_base64(image_base64,noise_factor=transform[0], contrast_factor=transform[1], brightness_factor=transform[2])
             if use_geo:
                 image_base64 = transform_image_with_random_position(image_base64)
-            show_pic(image_base64)
+            # show_pic(image_base64)
             query_content.append(
                 {
                     "type": "image_url",
