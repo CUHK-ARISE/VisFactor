@@ -15,6 +15,9 @@ from PIL import Image, ImageEnhance
 from io import BytesIO
 import matplotlib.pyplot as plt
 import numpy as np
+import random
+import io
+from IPython.display import display
 
 _MAX_TRY = 5
 _SLEEP = 5
@@ -91,6 +94,44 @@ def encode_image(image_path):
         return base64.b64encode(image_file.read()).decode('utf-8')
 
 
+def transform_image_with_random_position(base64_string):
+    try:
+        # Decode base64 to image
+        image_data = base64.b64decode(base64_string)
+        image = Image.open(io.BytesIO(image_data))
+
+        # Get image dimensions
+        width, height = image.size
+
+        # Create new canvas (double the original size)
+        new_width = width * 2
+        new_height = height * 2
+        canvas = Image.new('RGB', (new_width, new_height), 'white')
+
+        # Calculate center position
+        center_x = (new_width - width) // 2
+        center_y = (new_height - height) // 2
+
+        # Random rotation angle (-10 to +10 degrees)
+        rotation_angle = random.uniform(-10, 10)
+
+        # Random horizontal shift (normal distribution)
+        horizontal_shift = np.random.normal(loc=10, scale=5)
+
+        # Paste and rotate image
+        rotated_image = image.rotate(rotation_angle, expand=False)
+        canvas.paste(rotated_image, (int(center_x + horizontal_shift), center_y))
+
+        # Convert to JPEG base64 encoding
+        buffer = io.BytesIO()
+        canvas.save(buffer, format='JPEG')
+        result_base64 = base64.b64encode(buffer.getvalue()).decode()
+
+        return result_base64
+
+    except Exception as e:
+        return f"Error processing image: {str(e)}"
+
 def judge_correct(gpt, label):
     if gpt == '':
         return False
@@ -118,6 +159,12 @@ def judge_correct(gpt, label):
         return False
     return False
 
+def show_pic(base64_str):
+    image_data = base64.b64decode(base64_str)
+
+    image = Image.open(BytesIO(image_data))
+
+    display(image)
 
 @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(_MAX_TRY))
 def chat(payload):
@@ -126,7 +173,7 @@ def chat(payload):
     return response.json()
 
 
-def do_one_test(test_meta, test_mode, use_example, use_cot, test_prefix, use_reverse, transform):
+def do_one_test(test_meta, test_mode, use_example, use_cot, test_prefix, use_reverse, transform, use_geo):
     if test_mode == 'Split' and "Split" not in test_meta.keys():
         return
 
@@ -238,7 +285,9 @@ def do_one_test(test_meta, test_mode, use_example, use_cot, test_prefix, use_rev
                 Reversed = False
 
             image_base64 = process_image_from_base64(image_base64,noise_factor=transform[0], contrast_factor=transform[1], brightness_factor=transform[2])
-
+            if use_geo:
+                image_base64 = transform_image_with_random_position(image_base64)
+            show_pic(image_base64)
             query_content.append(
                 {
                     "type": "image_url",
@@ -379,7 +428,7 @@ if __name__ == "__main__":
                         )
     parser.add_argument("--maxtoken",
                         type=int,
-                        default=300
+                        default=3000
                         )
     parser.add_argument("--reversed",
                         action='store_true',
@@ -396,6 +445,10 @@ if __name__ == "__main__":
     parser.add_argument("--brightness",
                         type=float,
                         default=0.0
+                        )
+    parser.add_argument("--Geometric",
+                        action='store_true',
+                        help="whether to do geometric transformation."
                         )
     opt = parser.parse_args()
 
@@ -441,6 +494,7 @@ if __name__ == "__main__":
             use_cot=opt.cot,
             test_prefix=test_prefix,
             use_reverse=opt.reversed,
-            transform=transform
+            transform=transform,
+            use_geo=opt.Geometric
         )
 
