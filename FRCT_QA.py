@@ -122,9 +122,9 @@ def transform_image_with_random_position(base64_string):
 
         # Random horizontal shift (normal distribution)
         horizontal_shift = np.random.normal(loc=0, scale=5)
-
+        vertical_shift = np.random.normal(loc=0,scale=5)
         # Paste rotated image onto the canvas
-        canvas.paste(rotated_image, (int(center_x + horizontal_shift), int(center_y)))
+        canvas.paste(rotated_image, (int(center_x + horizontal_shift), int(center_y+vertical_shift)))
 
         # Convert to JPEG base64 encoding
         buffer = io.BytesIO()
