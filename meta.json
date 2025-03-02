@@ -1782,100 +1782,228 @@
             "Instruction": "For the question below: Please provide your answer in the following JSON format: {\"answer\": \"A_or_B_or_C_or_D_or_E\"}.",
             "Answers": [
                 [
-                    "C"
+                    "no",
+                    "no",
+                    "yes",
+                    "no",
+                    "no"
                 ],
                 [
-                    "D"
+                    "no",
+                    "no",
+                    "no",
+                    "yes",
+                    "no"
                 ],
                 [
-                    "E"
+                    "no",
+                    "no",
+                    "no",
+                    "no",
+                    "yes"
                 ],
                 [
-                    "C"
+                    "no",
+                    "no",
+                    "yes",
+                    "no",
+                    "no"
                 ],
                 [
-                    "A"
+                    "yes",
+                    "no",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "B"
+                    "no",
+                    "yes",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "E"
+                    "no",
+                    "no",
+                    "no",
+                    "no",
+                    "yes"
                 ],
                 [
-                    "B"
+                    "no",
+                    "yes",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "A"
+                    "yes",
+                    "no",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "C"
+                    "no",
+                    "no",
+                    "yes",
+                    "no",
+                    "no"
                 ],
                 [
-                    "A"
+                    "yes",
+                    "no",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "B"
+                    "no",
+                    "yes",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "A"
+                    "yes",
+                    "no",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "B"
+                    "no",
+                    "yes",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "D"
+                    "no",
+                    "no",
+                    "no",
+                    "yes",
+                    "no"
                 ],
                 [
-                    "A"
+                    "yes",
+                    "no",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "C"
+                    "no",
+                    "no",
+                    "yes",
+                    "no",
+                    "no"
                 ],
                 [
-                    "A"
+                    "yes",
+                    "no",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "E"
+                    "no",
+                    "no",
+                    "no",
+                    "no",
+                    "yes"
                 ],
                 [
-                    "B"
+                    "no",
+                    "yes",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "B"
+                    "no",
+                    "yes",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "D"
+                    "no",
+                    "no",
+                    "no",
+                    "yes",
+                    "no"
                 ],
                 [
-                    "C"
+                    "no",
+                    "no",
+                    "yes",
+                    "no",
+                    "no"
                 ],
                 [
-                    "B"
+                    "no",
+                    "yes",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "C"
+                    "no",
+                    "no",
+                    "yes",
+                    "no",
+                    "no"
                 ],
                 [
-                    "B"
+                    "no",
+                    "yes",
+                    "no",
+                    "no",
+                    "no"
                 ],
                 [
-                    "D"
+                    "no",
+                    "no",
+                    "no",
+                    "yes",
+                    "no"
                 ],
                 [
-                    "C"
+                    "no",
+                    "no",
+                    "yes",
+                    "no",
+                    "no"
                 ],
                 [
-                    "D"
+                    "no",
+                    "no",
+                    "no",
+                    "yes",
+                    "no"
                 ],
                 [
-                    "C"
+                    "no",
+                    "no",
+                    "yes",
+                    "no",
+                    "no"
                 ],
                 [
-                    "C"
+                    "no",
+                    "no",
+                    "yes",
+                    "no",
+                    "no"
                 ],
                 [
-                    "D"
+                    "no",
+                    "no",
+                    "no",
+                    "yes",
+                    "no"
                 ]
             ],
             "Questions": [
