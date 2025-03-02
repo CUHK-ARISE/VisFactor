@@ -17117,7 +17117,7 @@
             ]
         ],
         "Split": {
-            "Description": "How quickly can you recognize a figure that is hidden among other lines? Each problem in this test contains an image of a model and another image of a pattern. You are to look for the model in the first image from the pattern in the second image. The model must always be in the given position, not on its side or upside down. You are to answer \"X\" if the model appears in the pattern or answer \"O\" if the model does not appear.",
+            "Description": "How quickly can you recognize if a figure is not contained among other lines? Each problem in this test contains an image of a model and another image of a pattern. You are to determine if the model in the first image is not contained in the pattern in the second image. The model must always be in the given position, not on its side or upside down. You are to answer \"X\" if the model is not contained in the pattern or answer \"O\" if the model is contained.",
             "Instruction": "For the question below: Please provide your answer in the following JSON format: {\"answer\": \"X_or_O\"}.",
             "Answers": [
                 [
@@ -19925,7 +19925,7 @@
             ]
         },
         "Group": {
-            "Description": "How quickly can you recognize a figure that is hidden among other lines? Each problem in this test contains an image of a model and another image of many patterns. You are to look for the model in the first image from the patterns in the second image. The model must always be in the given position, not on its side or upside down. You are to answer \"X\" if the model appears in the pattern or answer \"O\" if the model does not appear.",
+            "Description": "How quickly can you recognize a figure that is hidden among other lines? Each problem in this test contains an image of a model and another image of many patterns. You are to determine if the model in the first image is not contained in the pattern in the second image. The model must always be in the given position, not on its side or upside down. You are to answer \"X\" if the model is not contained in the pattern or answer \"O\" if the model is contained.",
             "Instruction": "For the question below: Please provide your answer in the following JSON format: {\"answer\": [\"list_of_ten_X_or_O\"]}.",
             "Answers": [
                 [
@@ -20622,134 +20622,134 @@
             ]
         ],
         "Group": {
-            "Description": "Wooden blocks such as children play with are often cubical with a different letter, number, or symbol on each of the six faces (top, bottom, four sides). Each problem in this test consists of drawings of pairs of cubes or blocks of this kind. Remember, there is a different design, number, or letter on each face of a given cube or block. Note: No letters, numbers, or symbols appear on more than one face of a given cube. Except for that, any letter, number or symbol can be on the hidden faces of a cube. You are to decide whether the two cubes are the same or different after applying some rotations.",
-            "Instruction": "For the question below: Answer \"S\" if the two cubes are the same. Answer \"D\" if the two cubes are different. Please provide your answer in the following JSON format: {\"answer\": \"S_or_D\"}.",
+            "Description": "Wooden blocks such as children play with are often cubical with a different letter, number, or symbol on each of the six faces (top, bottom, four sides). Each problem in this test consists of drawings of pairs of cubes or blocks of this kind. Remember, there is a different design, number, or letter on each face of a given cube or block. Note: No letters, numbers, or symbols appear on more than one face of a given cube. Except for that, any letter, number or symbol can be on the hidden faces of a cube. You are to decide whether the two cubes are different after applying some rotations.",
+            "Instruction": "For the question below: Answer \"yes\" if the two cubes are different. Answer \"no\" if the two cubes are not different. Please provide your answer in the following JSON format: {\"answer\": \"yes_or_no\"}.",
             "Answers": [
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "D"
+                    "no"
                 ],
                 [
-                    "S"
+                    "yes"
                 ],
                 [
-                    "S"
+                    "yes"
                 ]
             ],
             "Questions": [
