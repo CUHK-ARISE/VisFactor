@@ -293,7 +293,7 @@ if __name__ == "__main__":
                         )
     parser.add_argument("--flag",
                         type=str,
-                        default="qwen",
+                        default="Gemini",
                         help="name of this run",
                         )
     parser.add_argument("--example",
