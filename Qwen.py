@@ -38,11 +38,11 @@ help_dict = {
 }
 
 @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(_MAX_TRY))
-def chat(payload):
+def chat(payload,key):
     # print(payload['messages'])
     client = OpenAI(
         # 若没有配置环境变量，请用百炼API Key将下行替换为：api_key="sk-xxx",
-        api_key="",
+        api_key=key,
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     )
     mes = payload['messages'][1]['content']
@@ -210,7 +210,7 @@ def do_one_test(test_meta, test_mode, use_example, use_cot, test_prefix, key):
         for _ in range(0, _MAX_TRY):
             with open(f"{output_path[:-5]}.txt", 'w') as f:
                 print(query_request_save, file=f)
-            full_json = chat(query_request).choices[0].message.content
+            full_json = chat(query_request,key).choices[0].message.content
             # print(full_json)
             try:
                 gpt_ans_str = full_json
@@ -324,12 +324,7 @@ if __name__ == "__main__":
         "temperature": opt.temperature,
         "max_tokens": opt.maxtoken
     }
-
-    HEADER = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {opt.key}"
-    }
-
+    
     with open("meta.json", 'r') as f:
         data = json.load(f)
     Split = ['CF1', 'CF2', 'VZ2', 'VZ3', 'S1', 'SS3', 'P3', 'I3']
