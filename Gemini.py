@@ -342,11 +342,6 @@ if __name__ == "__main__":
         "max_tokens": opt.maxtoken
     }
 
-    HEADER = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {opt.key}"
-    }
-
     with open("meta.json", 'r') as f:
         data = json.load(f)
 
