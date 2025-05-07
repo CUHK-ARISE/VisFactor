@@ -4,49 +4,70 @@ import matplotlib.pyplot as plt
 import os
 
 
-def plot_region_centered(region, vertex_coords, filename):
+def plot_region_centered(region, vertex_coords, filename,
+                         figsize=6, border_width=2):
     """
-    Draw a region (polygon) centered based on the vertex coordinates in region,
-    and save the result to filename.
+    Draw a region (polygon) centered, no markers, white fill & black border.
     """
-    coords = [vertex_coords[v] for v in region]
-    # Automatically close the polygon
-    coords.append(vertex_coords[region[0]])
+    # 提取顶点并首尾闭合
+    coords = [vertex_coords[v] for v in region] + [vertex_coords[region[0]]]
     xs, ys = zip(*coords)
+
+    # 计算中心和范围+留白
     minx, maxx = min(xs), max(xs)
     miny, maxy = min(ys), max(ys)
-    centerx = (minx + maxx) / 2
-    centery = (miny + maxy) / 2
-    width = maxx - minx
-    height = maxy - miny
-    margin = max(width, height) * 0.2
+    cx, cy = (minx+maxx)/2, (miny+maxy)/2
+    w, h = maxx-minx, maxy-miny
+    m = max(w, h) * 0.2
 
-    plt.figure(figsize=(6, 6))
-    plt.plot(xs, ys, marker='o')
-    plt.fill(xs, ys, alpha=0.3)
-    plt.xlim(centerx - (width / 2 + margin), centerx + (width / 2 + margin))
-    plt.ylim(centery - (height / 2 + margin), centery + (height / 2 + margin))
-    plt.gca().set_aspect('equal', 'box')
-    plt.axis('off')
-    plt.savefig(filename, bbox_inches='tight', pad_inches=0.1)
-    plt.close()
+    # 新建 figure/axes
+    fig, ax = plt.subplots(figsize=(figsize, figsize))
+    # 白色填充，黑色边框
+    ax.fill(xs, ys,
+            facecolor='white',
+            edgecolor='black',
+            linewidth=border_width)
+    # 再额外画一遍轮廓，确保线宽
+    ax.plot(xs, ys,
+            color='black',
+            linewidth=border_width)
+
+    # 设置范围并居中
+    ax.set_xlim(cx - w/2 - m, cx + w/2 + m)
+    ax.set_ylim(cy - h/2 - m, cy + h/2 + m)
+    ax.set_aspect('equal', 'box')
+    ax.axis('off')
+
+    fig.savefig(filename,
+                bbox_inches='tight',
+                pad_inches=0.1)
+    plt.close(fig)
 
 
-def plot_polygon(polygon, vertex_coords, filename):
+def plot_polygon(polygon, vertex_coords, filename,
+                 figsize=6, border_width=2):
     """
-    Draw the complete polygon and save it as an image.
+    Draw the complete polygon; no markers; white fill, black border.
     """
-    coords = [vertex_coords[v] for v in polygon]
-    # Close the polygon by adding the first vertex again
-    coords.append(vertex_coords[polygon[0]])
+    coords = [vertex_coords[v] for v in polygon] + [vertex_coords[polygon[0]]]
     xs, ys = zip(*coords)
-    plt.figure(figsize=(6, 6))
-    plt.plot(xs, ys, marker='o')
-    plt.fill(xs, ys, alpha=0.3)
-    plt.gca().set_aspect('equal', 'box')
-    plt.axis('off')
-    plt.savefig(filename, bbox_inches='tight', pad_inches=0.1)
-    plt.close()
+
+    fig, ax = plt.subplots(figsize=(figsize, figsize))
+    ax.fill(xs, ys,
+            facecolor='white',
+            edgecolor='black',
+            linewidth=border_width)
+    ax.plot(xs, ys,
+            color='black',
+            linewidth=border_width)
+
+    ax.set_aspect('equal', 'box')
+    ax.axis('off')
+
+    fig.savefig(filename,
+                bbox_inches='tight',
+                pad_inches=0.1)
+    plt.close(fig)
 
 
 def create_distractor(region, vertex_coords, distortion_type):
