@@ -1,384 +1,583 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-from collections import deque
+from matplotlib.patches import Polygon, Circle
+import os
+from shapely.geometry import Polygon as ShapelyPolygon
+from shapely.geometry import LineString, Point
 import random
 import math
-import os
+from shapely.affinity import rotate, translate
 
-class GridPaperSimulatorFoldedEdges:
-    """
-    Simulates folding, punching, and unfolding of a grid-based paper.
-    Visualizes internal grid lines, current boundaries, AND folded original boundaries.
-    Outputs steps to PNG files.
-    """
-    def __init__(self, size=6, output_dir="folding_steps_edges"):
-        if size <= 0 or not isinstance(size, int):
-            raise ValueError("Size must be a positive integer.")
-        self.size = size
-        self.is_valid = np.ones((size, size), dtype=bool)
-        self.paper_layers = [[deque([(r, c)]) for c in range(size)] for r in range(size)]
-        self.folds = []
-        self.hole_location_folded = None
-        self.holes_unfolded = np.zeros((size, size), dtype=bool)
-        self.output_dir = output_dir
-        self.step_counter = 0
+
+class EnhancedPaperFolder:
+    def __init__(self, grid_size=6):
+        """初始化折纸模拟器"""
+        self.grid_size = grid_size
+        # 初始化纸张为正方形，用顶点坐标表示
+        self.paper = ShapelyPolygon([
+            (0, 0), (grid_size, 0),
+            (grid_size, grid_size), (0, grid_size)
+        ])
+        self.fold_count = 0
+        self.output_dir = "folding_results"
+        self.fold_history = []  # 记录折叠历史
+
+        # 创建输出目录
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
-            print(f"Created output directory: {self.output_dir}")
 
-        print(f"Initialized a {size}x{size} grid paper. Outputting steps to '{self.output_dir}/'")
-        self._plot_state("Step 0: Initial Grid Paper")
+        # 保存初始状态
+        self._draw_and_save()
 
-    def get_current_bounds(self):
-        rows, cols = np.where(self.is_valid)
-        if len(rows) == 0: return None
-        return rows.min(), rows.max(), cols.min(), cols.max()
+    def fold(self, line_type, position):
+        """
+        沿指定线折叠纸张
+        line_type: 'h'(水平), 'v'(垂直), 'd+'(斜率为+1的对角线), 'd-'(斜率为-1的对角线)
+        position: 折叠线的位置
+        返回: 是否成功执行了折叠
+        """
+        # 计算折叠线
+        fold_line = self._get_fold_line(line_type, position)
 
-    def _check_segment_is_folded_original(self, r, c, axis):
-        """Checks if a line segment corresponds to an original boundary for any layer."""
-        # Check horizontal segment at y=r, between x=c and x=c+1
-        if axis == 'h':
-            cell_above = (r - 1, c)
-            cell_below = (r, c)
-            # Check layers in cell_above for original top edge
-            if 0 <= cell_above[0] < self.size and self.is_valid[cell_above]:
-                for orig_r, _ in self.paper_layers[cell_above[0]][cell_above[1]]:
-                    if orig_r == 0: return True
-            # Check layers in cell_below for original bottom edge
-            if 0 <= cell_below[0] < self.size and self.is_valid[cell_below]:
-                for orig_r, _ in self.paper_layers[cell_below[0]][cell_below[1]]:
-                    if orig_r == self.size - 1: return True
-        # Check vertical segment at x=c, between y=r and y=r+1
-        elif axis == 'v':
-            cell_left = (r, c - 1)
-            cell_right = (r, c)
-            # Check layers in cell_left for original left edge
-            if 0 <= cell_left[1] < self.size and self.is_valid[cell_left]:
-                for _, orig_c in self.paper_layers[cell_left[0]][cell_left[1]]:
-                    if orig_c == 0: return True
-            # Check layers in cell_right for original right edge
-            if 0 <= cell_right[1] < self.size and self.is_valid[cell_right]:
-                 for _, orig_c in self.paper_layers[cell_right[0]][cell_right[1]]:
-                     if orig_c == self.size - 1: return True
-        return False
+        # 如果折叠线不与纸张相交，则不进行折叠
+        if not fold_line.intersects(self.paper):
+            print(f"折叠线不与纸张相交，跳过折叠")
+            # 不增加fold_count，不记录历史，不输出PNG
+            return False
 
+        # 记录折叠历史
+        self.fold_history.append((line_type, position))
+        self.fold_count += 1
 
-    def _plot_state(self, title):
-        """Plots the current state with folded edge visualization and saves to PNG."""
-        fig, ax = plt.subplots(figsize=(6, 6))
-        ax.set_title(title, fontsize=12)
-        self.step_counter += 1
-        filename = os.path.join(self.output_dir, f"step_{self.step_counter:02d}_{title.replace(' ', '_').replace(':', '').replace('=', '').replace('(','').replace(')','')}.png")
+        # 将纸张分成两部分：保持不变的部分和需要折叠的部分
+        line_coords = list(fold_line.coords)
+        # 延长折叠线，确保它完全穿过纸张
+        extended_line = self._extend_line(line_coords[0], line_coords[1])
 
-        line_color_internal = 'lightgrey'
-        line_color_boundary = 'black'
-        line_width_internal = 0.5
-        line_width_boundary = 1.5
+        # 使用扩展的线分割纸张
+        split_result = self._split_polygon_by_line(self.paper, extended_line)
 
-        # --- Draw Grid Lines and Boundaries ---
-        plotted_segments = set() # To avoid plotting segments twice
+        if len(split_result) != 2:
+            print(f"折叠线没有正确分割纸张，跳过折叠 #{self.fold_count}")
+            self._draw_and_save()
+            return False
 
-        for r in range(self.size + 1): # Horizontal lines Y = r
-            for c in range(self.size): # Between X=c and X=c+1
-                segment_id = (r, c, 'h')
-                if segment_id in plotted_segments: continue
-
-                is_above_valid = self.is_valid[r - 1, c] if 0 <= r - 1 < self.size else False
-                is_below_valid = self.is_valid[r, c] if 0 <= r < self.size else False
-
-                color = line_color_internal
-                width = line_width_internal
-                draw = False
-
-                if is_above_valid != is_below_valid: # External Boundary
-                    color = line_color_boundary
-                    width = line_width_boundary
-                    draw = True
-                elif is_above_valid and is_below_valid: # Internal Line
-                    if self._check_segment_is_folded_original(r, c, 'h'):
-                        color = line_color_boundary # Folded Original Boundary
-                        width = line_width_boundary
-                    else:
-                        color = line_color_internal # Internal Grid Line
-                        width = line_width_internal
-                    draw = True
-                # else: both invalid, don't draw
-
-                if draw:
-                    ax.plot([c, c + 1], [r, r], color=color, lw=width, solid_capstyle='butt')
-                    plotted_segments.add(segment_id)
-
-        for c in range(self.size + 1): # Vertical lines X = c
-            for r in range(self.size): # Between Y=r and Y=r+1
-                segment_id = (r, c, 'v')
-                if segment_id in plotted_segments: continue
-
-                is_left_valid = self.is_valid[r, c - 1] if 0 <= c - 1 < self.size else False
-                is_right_valid = self.is_valid[r, c] if 0 <= c < self.size else False
-
-                color = line_color_internal
-                width = line_width_internal
-                draw = False
-
-                if is_left_valid != is_right_valid: # External Boundary
-                    color = line_color_boundary
-                    width = line_width_boundary
-                    draw = True
-                elif is_left_valid and is_right_valid: # Internal Line
-                    if self._check_segment_is_folded_original(r, c, 'v'):
-                         color = line_color_boundary # Folded Original Boundary
-                         width = line_width_boundary
-                    else:
-                         color = line_color_internal # Internal Grid Line
-                         width = line_width_internal
-                    draw = True
-                # else: both invalid, don't draw
-
-                if draw:
-                    ax.plot([c, c], [r, r + 1], color=color, lw=width, solid_capstyle='butt')
-                    plotted_segments.add(segment_id)
-
-
-        # --- Draw Fold Lines (on top) ---
-        fold_legend_added = False
-        for axis, line_coord, _ in self.folds:
-            label = 'Fold Line' if not fold_legend_added else '_nolegend_'
-            if axis == 'h':
-                 ax.plot([0, self.size], [line_coord, line_coord], 'r--', lw=1.5, label=label)
-            else:
-                 ax.plot([line_coord, line_coord], [0, self.size], 'r--', lw=1.5, label=label)
-            fold_legend_added = True
-
-
-        # --- Show Punched Hole Location ---
-        if self.hole_location_folded:
-            r_hole, c_hole = self.hole_location_folded
-            ax.plot(c_hole + 0.5, r_hole + 0.5, 'ko', markersize=8, mfc='black', label=f'Punched at ({r_hole},{c_hole})')
-
-        # --- Final Plot Setup ---
-        ax.set_xlim(-0.5, self.size + 0.5)
-        ax.set_ylim(-0.5, self.size + 0.5)
-        ax.invert_yaxis()
-        ax.set_aspect('equal', adjustable='box')
-        plt.xlabel("Column Index")
-        plt.ylabel("Row Index")
-        plt.xticks(np.arange(self.size + 1))
-        plt.yticks(np.arange(self.size + 1))
-        plt.grid(False)
-        # Add legend if folds or hole exist
-        if self.folds or self.hole_location_folded:
-             # Check if there are actual labels to display
-             handles, labels = ax.get_legend_handles_labels()
-             if labels:
-                 ax.legend(fontsize=8, loc='best') # 'best' might be better than 'upper right'
-
-
-        # --- Save and Close ---
-        try:
-            plt.savefig(filename)
-            print(f"Saved state to {filename}")
-        except Exception as e:
-            print(f"Error saving file {filename}: {e}")
-        plt.close(fig)
-
-    def _plot_unfolded(self):
-        """Plots the final unfolded paper with holes and saves to PNG."""
-        fig, ax = plt.subplots(figsize=(6, 6))
-        ax.set_title("Final Unfolded Paper with Holes", fontsize=12)
-        filename = os.path.join(self.output_dir, "final_unfolded_paper.png")
-
-        line_color_internal = 'lightgrey'
-        line_color_boundary = 'black'
-        line_width_internal = 0.5
-        line_width_boundary = 1.5
-
-        # Draw internal grid lines
-        for i in range(1, self.size):
-            ax.axhline(i, color=line_color_internal, lw=line_width_internal)
-            ax.axvline(i, color=line_color_internal, lw=line_width_internal)
-        # Draw outer boundary
-        ax.add_patch(patches.Rectangle((0, 0), self.size, self.size,
-                                       linewidth=line_width_boundary, edgecolor=line_color_boundary, facecolor='none'))
-        # Show final hole locations
-        hole_rows, hole_cols = np.where(self.holes_unfolded)
-        if len(hole_rows) > 0:
-            ax.plot(hole_cols + 0.5, hole_rows + 0.5, 'ro', markersize=8, mfc='red', label=f'{len(hole_rows)} Holes')
-            ax.legend(fontsize=8)
-
-        ax.set_xlim(-0.5, self.size + 0.5)
-        ax.set_ylim(-0.5, self.size + 0.5)
-        ax.invert_yaxis()
-        ax.set_aspect('equal', adjustable='box')
-        plt.xlabel("Column Index")
-        plt.ylabel("Row Index")
-        plt.xticks(np.arange(self.size + 1))
-        plt.yticks(np.arange(self.size + 1))
-        plt.grid(False)
-
-        try:
-            plt.savefig(filename)
-            print(f"Saved final unfolded state to {filename}")
-        except Exception as e:
-            print(f"Error saving file {filename}: {e}")
-        plt.close(fig)
-
-
-    # --- Methods for folding, punching, unfolding (unchanged from previous version) ---
-    def get_valid_folds(self):
-        bounds = self.get_current_bounds()
-        if bounds is None: return []
-        min_r, max_r, min_c, max_c = bounds
-        valid_folds = []
-        for r_line in range(min_r + 1, max_r + 1):
-             if np.any(self.is_valid[min_r:r_line, min_c:max_c+1]) and \
-                np.any(self.is_valid[r_line:max_r+1, min_c:max_c+1]):
-                 valid_folds.append(('h', r_line))
-        for c_line in range(min_c + 1, max_c + 1):
-             if np.any(self.is_valid[min_r:max_r+1, min_c:c_line]) and \
-                np.any(self.is_valid[min_r:max_r+1, c_line:max_c+1]):
-                 valid_folds.append(('v', c_line))
-        return valid_folds
-
-    def fold(self, axis, line_coord):
-        bounds = self.get_current_bounds()
-        if bounds is None: return False
-        min_r, max_r, min_c, max_c = bounds
-        is_valid_choice = False
-        if axis == 'h' and min_r < line_coord <= max_r:
-             if np.any(self.is_valid[min_r:line_coord, min_c:max_c+1]) and \
-                np.any(self.is_valid[line_coord:max_r+1, min_c:max_c+1]):
-                  is_valid_choice = True
-        elif axis == 'v' and min_c < line_coord <= max_c:
-             if np.any(self.is_valid[min_r:max_r+1, min_c:line_coord]) and \
-                np.any(self.is_valid[min_r:max_r+1, line_coord:max_c+1]):
-                  is_valid_choice = True
-        if not is_valid_choice: return False
-
-        fold_away_indices, target_indices_func, folded_side_label = None, None, ""
-        if axis == 'h':
-            height_top = line_coord - min_r; height_bottom = (max_r + 1) - line_coord
-            target_row_func = lambda r: 2 * line_coord - 1 - r
-            if height_top <= height_bottom:
-                fold_away_rows = range(min_r, line_coord); folded_side_label = "top"
-            else:
-                fold_away_rows = range(line_coord, max_r + 1); folded_side_label = "bottom"
-            fold_away_indices = [(r, c) for r in fold_away_rows for c in range(min_c, max_c + 1)]
-            target_indices_func = lambda r, c: (target_row_func(r), c)
-        else: # axis == 'v'
-            width_left = line_coord - min_c; width_right = (max_c + 1) - line_coord
-            target_col_func = lambda c: 2 * line_coord - 1 - c
-            if width_left <= width_right:
-                fold_away_cols = range(min_c, line_coord); folded_side_label = "left"
-            else:
-                fold_away_cols = range(line_coord, max_c + 1); folded_side_label = "right"
-            fold_away_indices = [(r, c) for r in range(min_r, max_r + 1) for c in fold_away_cols]
-            target_indices_func = lambda r, c: (r, target_col_func(c))
-
-        print(f"Performing Fold {len(self.folds) + 1}: axis={axis}, line={line_coord}, folding {folded_side_label} part.")
-        for r_from, c_from in fold_away_indices:
-            if self.is_valid[r_from, c_from]:
-                r_to, c_to = target_indices_func(r_from, c_from)
-                if 0 <= r_to < self.size and 0 <= c_to < self.size:
-                     layers_to_move = self.paper_layers[r_from][c_from]
-                     self.paper_layers[r_to][c_to].extend(layers_to_move)
-                     self.paper_layers[r_from][c_from].clear()
-                     self.is_valid[r_from, c_from] = False
-                # else: Warning optional
-        self.folds.append((axis, line_coord, folded_side_label))
-        self._plot_state(f"After Fold {len(self.folds)} ({axis}={line_coord} fold {folded_side_label})")
-        return True
-
-    def get_valid_punch_locations(self):
-        rows, cols = np.where(self.is_valid)
-        return list(zip(rows, cols))
-
-    def punch_hole(self, row, col):
-        if not self.is_valid[row, col]: return False
-        print(f"Punching hole at cell ({row}, {col}).")
-        self.hole_location_folded = (row, col)
-        self._plot_state("Paper with Hole Punched")
-        return True
-
-    def unfold(self):
-        if self.hole_location_folded is None:
-            print("No hole was punched. Nothing to unfold.")
-            if self.folds: self._plot_state(f"Final Folded State (No Hole)")
-            else: self._plot_state("Initial State (No Folds or Punch)")
-            self._plot_unfolded() # Plot empty unfolded grid
-            return
-
-        punch_r, punch_c = self.hole_location_folded
-        layers_at_punch_location = self.paper_layers[punch_r][punch_c]
-        if not layers_at_punch_location:
-             self.holes_unfolded = np.zeros((self.size, self.size), dtype=bool)
+        # 确定哪一部分需要被折叠（通常是较小的那部分）
+        part1, part2 = split_result
+        if part1.area > part2.area:
+            stationary_part, folding_part = part1, part2
         else:
-             print(f"\nUnfolding based on hole punched at ({punch_r},{punch_c}).")
-             final_holes = np.zeros((self.size, self.size), dtype=bool)
-             unique_orig_coords = set(layers_at_punch_location)
-             print(f"Layers correspond to {len(unique_orig_coords)} unique original cells:")
-             for orig_r, orig_c in unique_orig_coords:
-                 print(f"  - Original cell: ({orig_r}, {orig_c})")
-                 if 0 <= orig_r < self.size and 0 <= orig_c < self.size:
-                     final_holes[orig_r, orig_c] = True
-             self.holes_unfolded = final_holes
-             print(f"Total unique unfolded holes: {np.sum(self.holes_unfolded)}")
-        self._plot_unfolded()
+            stationary_part, folding_part = part2, part1
 
-    def run_simulation(self, num_folds=None):
-        if num_folds is None: num_folds = random.randint(2, 3)
-        print(f"--- Starting Simulation: {num_folds} random folds ---")
-        folds_done = 0
-        for i in range(num_folds):
-            possible_folds = self.get_valid_folds()
-            if not possible_folds: break
-            axis, line_coord = random.choice(possible_folds)
-            if self.fold(axis, line_coord): folds_done += 1
-            else: break
-        if folds_done == 0:
-             if not self.folds: self._plot_state("Final State (No Folds Performed)")
-             return
-        possible_punches = self.get_valid_punch_locations()
-        if not possible_punches:
-            print("Error: No valid locations left to punch a hole after folding.")
-            self._plot_state(f"Final Folded State (No Punch Spot)")
-            self.unfold()
-            return
-        punch_r, punch_c = random.choice(possible_punches)
-        if not self.punch_hole(punch_r, punch_c): return
-        self.unfold()
-        print(f"--- Simulation Complete --- Output saved in '{self.output_dir}' directory.")
+        # 执行折叠（将folding_part沿fold_line反射）
+        folded_part = self._reflect_polygon(folding_part, fold_line)
 
-# --- Run the Simulation ---
-try:
-    simulator = GridPaperSimulatorFoldedEdges(size=6, output_dir="folding_simulation_output_edges")
-    # Example: Force the fold you described for testing
-    print("\n--- Forcing Specific Fold for Testing ---")
-    sim_test = GridPaperSimulatorFoldedEdges(size=6, output_dir="folding_test_fold_edge")
-    # Fold bottom up along y=2 (line between row 1 and 2)
-    sim_test.fold('h', 2) # This should show y=0 edge folded to y=3 (since target_row = 2*2-1-r = 3-r)
-    # Now maybe fold right part left along x=4
-    sim_test.fold('v', 4)
-    # Punch a hole in a valid spot
-    valid_spots = sim_test.get_valid_punch_locations()
-    if valid_spots:
-        r_punch, c_punch = valid_spots[0] # Punch first valid spot
-        sim_test.punch_hole(r_punch, c_punch)
-        sim_test.unfold()
+        # 合并两部分形成新的纸张
+        self.paper = stationary_part.union(folded_part)
+
+        # 绘制并保存结果
+        self._draw_and_save()
+        return True
+
+    def _get_fold_line(self, line_type, position):
+        """根据折叠类型和位置获取折叠线"""
+        grid = self.grid_size
+
+        if line_type == 'h':  # 水平线
+            return LineString([(0, position), (grid, position)])
+
+        elif line_type == 'v':  # 垂直线
+            return LineString([(position, 0), (position, grid)])
+
+        elif line_type == 'd+':  # 斜率为+1的对角线 (y = x + b)
+            b = position
+            # 找出与网格边界的交点
+            intersections = []
+
+            # 与左边界相交 (x=0)
+            y_left = b
+            if 0 <= y_left <= grid:
+                intersections.append((0, y_left))
+
+            # 与右边界相交 (x=grid)
+            y_right = grid + b
+            if 0 <= y_right <= grid:
+                intersections.append((grid, y_right))
+
+            # 与下边界相交 (y=0)
+            x_bottom = -b
+            if 0 <= x_bottom <= grid:
+                intersections.append((x_bottom, 0))
+
+            # 与上边界相交 (y=grid)
+            x_top = grid - b
+            if 0 <= x_top <= grid:
+                intersections.append((x_top, grid))
+
+            # 确保有两个交点
+            if len(intersections) >= 2:
+                return LineString([intersections[0], intersections[1]])
+            else:
+                return LineString([(0, 0), (0, 0)])  # 返回一个退化的线段
+
+        elif line_type == 'd-':  # 斜率为-1的对角线 (y = -x + b)
+            b = position
+            # 找出与网格边界的交点
+            intersections = []
+
+            # 与左边界相交 (x=0)
+            y_left = b
+            if 0 <= y_left <= grid:
+                intersections.append((0, y_left))
+
+            # 与右边界相交 (x=grid)
+            y_right = -grid + b
+            if 0 <= y_right <= grid:
+                intersections.append((grid, y_right))
+
+            # 与下边界相交 (y=0)
+            x_bottom = b
+            if 0 <= x_bottom <= grid:
+                intersections.append((x_bottom, 0))
+
+            # 与上边界相交 (y=grid)
+            x_top = b - grid
+            if 0 <= x_top <= grid:
+                intersections.append((x_top, grid))
+
+            # 确保有两个交点
+            if len(intersections) >= 2:
+                return LineString([intersections[0], intersections[1]])
+            else:
+                return LineString([(0, 0), (0, 0)])  # 返回一个退化的线段
+
+        else:
+            raise ValueError("无效的折叠线类型")
+
+    def _extend_line(self, p1, p2):
+        """延长线段，确保它足够长以穿过整个纸张"""
+        # 计算方向向量
+        dx = p2[0] - p1[0]
+        dy = p2[1] - p1[1]
+
+        # 避免除以零
+        if dx == 0 and dy == 0:
+            return LineString([p1, p2])
+
+        # 计算延长因子（确保线足够长）
+        extension_factor = 2 * self.grid_size / max(abs(dx), abs(dy)) if max(abs(dx), abs(dy)) > 0 else 1
+
+        # 计算延长后的端点
+        extended_p1 = (p1[0] - extension_factor * dx, p1[1] - extension_factor * dy)
+        extended_p2 = (p2[0] + extension_factor * dx, p2[1] + extension_factor * dy)
+
+        return LineString([extended_p1, extended_p2])
+
+    def _split_polygon_by_line(self, polygon, line):
+        """使用线分割多边形"""
+        # 如果线不与多边形相交，则返回原多边形
+        if not line.intersects(polygon):
+            return [polygon]
+
+        # 获取多边形的坐标
+        poly_coords = list(polygon.exterior.coords)
+
+        # 获取线的坐标
+        line_coords = list(line.coords)
+
+        # 计算线段方程 Ax + By + C = 0
+        x1, y1 = line_coords[0]
+        x2, y2 = line_coords[1]
+        A = y2 - y1
+        B = x1 - x2
+        C = x2 * y1 - x1 * y2
+
+        # 将点分为两组，基于它们相对于线的位置
+        group1 = []
+        group2 = []
+
+        for point in poly_coords[:-1]:  # 排除最后一个点（它与第一个点重复）
+            # 计算点到线的有符号距离
+            x, y = point
+            dist = (A * x + B * y + C) / np.sqrt(A ** 2 + B ** 2)
+
+            if dist > 1e-10:  # 使用小的阈值来处理数值误差
+                group1.append(point)
+            elif dist < -1e-10:
+                group2.append(point)
+            else:  # 点在线上，添加到两个组
+                group1.append(point)
+                group2.append(point)
+
+        # 计算线与多边形边界的交点
+        intersections = []
+        for i in range(len(poly_coords) - 1):
+            edge = LineString([poly_coords[i], poly_coords[i + 1]])
+            if line.intersects(edge):
+                intersection = line.intersection(edge)
+                if not intersection.is_empty:
+                    if intersection.geom_type == 'Point':
+                        intersections.append((intersection.x, intersection.y))
+                    elif intersection.geom_type == 'MultiPoint':
+                        for point in intersection.geoms:
+                            intersections.append((point.x, point.y))
+
+        # 去除重复的交点
+        unique_intersections = []
+        for point in intersections:
+            if point not in unique_intersections:
+                unique_intersections.append(point)
+
+        # 如果有交点，将它们添加到两个组
+        if len(unique_intersections) >= 2:
+            for point in unique_intersections:
+                if point not in group1:
+                    group1.append(point)
+                if point not in group2:
+                    group2.append(point)
+
+        # 创建两个新的多边形
+        result = []
+        if len(group1) >= 3:
+            # 对点进行排序，使其形成有效的多边形
+            group1 = self._sort_points_to_form_polygon(group1)
+            poly1 = ShapelyPolygon(group1)
+            if poly1.is_valid and poly1.area > 0:
+                result.append(poly1)
+
+        if len(group2) >= 3:
+            # 对点进行排序，使其形成有效的多边形
+            group2 = self._sort_points_to_form_polygon(group2)
+            poly2 = ShapelyPolygon(group2)
+            if poly2.is_valid and poly2.area > 0:
+                result.append(poly2)
+
+        return result
+
+    def _sort_points_to_form_polygon(self, points):
+        """将点排序，使其形成有效的多边形"""
+        # 计算中心点
+        center_x = sum(p[0] for p in points) / len(points)
+        center_y = sum(p[1] for p in points) / len(points)
+
+        # 按照相对于中心点的角度排序
+        def angle_to_center(point):
+            return np.arctan2(point[1] - center_y, point[0] - center_x)
+
+        sorted_points = sorted(points, key=angle_to_center)
+
+        # 确保多边形闭合
+        if sorted_points[0] != sorted_points[-1]:
+            sorted_points.append(sorted_points[0])
+
+        return sorted_points
+
+    def _reflect_polygon(self, polygon, axis):
+        """沿着给定的轴反射多边形"""
+        # 获取轴的两个点
+        axis_coords = list(axis.coords)
+        p1, p2 = axis_coords[0], axis_coords[1]
+
+        # 计算轴的方向向量
+        dx = p2[0] - p1[0]
+        dy = p2[1] - p1[1]
+
+        # 计算轴的角度（相对于x轴）
+        angle = np.arctan2(dy, dx) * 180 / np.pi
+
+        # 将多边形平移，使轴通过原点
+        translated_polygon = translate(polygon, -p1[0], -p1[1])
+
+        # 旋转多边形，使轴与x轴对齐
+        rotated_polygon = rotate(translated_polygon, -angle, origin=(0, 0))
+
+        # 沿x轴反射（即y坐标取反）
+        reflected_coords = []
+        for x, y in rotated_polygon.exterior.coords:
+            reflected_coords.append((x, -y))
+
+        reflected_polygon = ShapelyPolygon(reflected_coords)
+
+        # 旋转回原来的角度
+        rotated_back = rotate(reflected_polygon, angle, origin=(0, 0))
+
+        # 平移回原来的位置
+        final_polygon = translate(rotated_back, p1[0], p1[1])
+
+        return final_polygon
+
+    def _draw_and_save(self):
+        """绘制当前纸张状态并保存为PNG"""
+        fig, ax = plt.subplots(figsize=(8, 8))
+
+        # 绘制网格
+        for i in range(self.grid_size + 1):
+            ax.axhline(y=i, color='gray', linestyle='-', alpha=0.3)
+            ax.axvline(x=i, color='gray', linestyle='-', alpha=0.3)
+
+        # 绘制纸张
+        if self.paper.geom_type == 'Polygon':
+            x, y = self.paper.exterior.xy
+            ax.fill(x, y, alpha=0.7, fc='lightblue', ec='blue')
+        elif self.paper.geom_type == 'MultiPolygon':
+            for geom in self.paper.geoms:
+                x, y = geom.exterior.xy
+                ax.fill(x, y, alpha=0.7, fc='lightblue', ec='blue')
+
+        # 设置图形属性
+        ax.set_xlim(-1, self.grid_size + 1)
+        ax.set_ylim(-1, self.grid_size + 1)
+        ax.set_aspect('equal')
+        ax.set_title(f'折叠 #{self.fold_count}')
+
+        # 保存图像
+        plt.savefig(os.path.join(self.output_dir, f'fold_{self.fold_count}.png'))
+        plt.close()
+
+    def random_fold(self, num_folds=5):
+        """执行随机折叠，确保所有折叠线都严格沿着整数格线"""
+        successful_folds = 0
+        attempts = 0
+        max_attempts = num_folds * 3  # 设置最大尝试次数，避免无限循环
+
+        while successful_folds < num_folds and attempts < max_attempts:
+            # 随机选择折叠线类型
+            line_type = random.choice(['h', 'v', 'd+', 'd-'])
+
+            # 随机选择折叠线位置（仅使用整数值）
+            if line_type == 'h' or line_type == 'v':
+                # 水平或垂直折叠线只能是整数（严格沿着格线）
+                position = random.randint(0, self.grid_size)
+            elif line_type == 'd+':
+                # 对于y = x + b，确保b是整数
+                position = random.randint(-self.grid_size, self.grid_size)
+            else:  # line_type == 'd-'
+                # 对于y = -x + b，确保b是整数
+                position = random.randint(0, 2 * self.grid_size)
+
+            # 尝试执行折叠
+            if self.fold(line_type, position):
+                successful_folds += 1
+
+            attempts += 1
+
+        return successful_folds
+
+    def punch_hole(self):
+        """在纸张上随机打一个孔，确保孔在格子的正中央"""
+        # 确保纸张存在
+        if self.paper.is_empty:
+            print("纸张不存在，无法打孔")
+            return None
+
+        # 获取纸张的边界框
+        minx, miny, maxx, maxy = self.paper.bounds
+
+        # 创建所有可能的格子中心点
+        possible_points = []
+        for i in range(int(minx), int(maxx) + 1):
+            for j in range(int(miny), int(maxy) + 1):
+                # 格子中心点坐标
+                center_x = i + 0.5
+                center_y = j + 0.5
+
+                # 检查点是否在纸张范围内
+                if minx <= center_x <= maxx and miny <= center_y <= maxy:
+                    possible_points.append((center_x, center_y))
+
+        # 随机打乱可能的点
+        random.shuffle(possible_points)
+
+        # 尝试每个可能的点
+        for x, y in possible_points:
+            point = Point(x, y)
+
+            # 检查点是否在纸张内
+            if self.paper.contains(point):
+                # 绘制并保存带孔的纸张
+                self._draw_hole(point)
+                return (x, y)
+
+        print("无法在纸张上找到合适的打孔位置")
+        return None
+
+    def _draw_hole(self, point):
+        """绘制带孔的纸张"""
+        fig, ax = plt.subplots(figsize=(8, 8))
+
+        # 绘制网格
+        for i in range(self.grid_size + 1):
+            ax.axhline(y=i, color='gray', linestyle='-', alpha=0.3)
+            ax.axvline(x=i, color='gray', linestyle='-', alpha=0.3)
+
+        # 绘制纸张
+        if self.paper.geom_type == 'Polygon':
+            x, y = self.paper.exterior.xy
+            ax.fill(x, y, alpha=0.7, fc='lightblue', ec='blue')
+        elif self.paper.geom_type == 'MultiPolygon':
+            for geom in self.paper.geoms:
+                x, y = geom.exterior.xy
+                ax.fill(x, y, alpha=0.7, fc='lightblue', ec='blue')
+
+        # 绘制孔
+        hole = Circle((point.x, point.y), 0.1, color='red')
+        ax.add_patch(hole)
+
+        # 设置图形属性
+        ax.set_xlim(-1, self.grid_size + 1)
+        ax.set_ylim(-1, self.grid_size + 1)
+        ax.set_aspect('equal')
+        ax.set_title(f'带孔的折叠纸 #{self.fold_count}')
+
+        # 保存图像
+        plt.savefig(os.path.join(self.output_dir, f'fold_{self.fold_count}_with_hole.png'))
+        plt.close()
+
+    def unfold_and_show_holes(self, hole_coords):
+        """展开纸张并显示所有孔的位置"""
+        # 创建初始正方形纸张
+        original_paper = ShapelyPolygon([
+            (0, 0), (self.grid_size, 0),
+            (self.grid_size, self.grid_size), (0, self.grid_size)
+        ])
+
+        # 将孔的坐标转换为点
+        hole = Point(hole_coords)
+
+        # 反向应用折叠历史，计算孔在原始纸张上的所有位置
+        all_holes = [hole]
+        current_paper = self.paper
+
+        # 反向遍历折叠历史
+        for line_type, position in reversed(self.fold_history):
+            # 计算折叠线
+            fold_line = self._get_fold_line(line_type, position)
+
+            # 找出新的孔位置
+            new_holes = []
+            for h in all_holes:
+                # 如果孔在折叠线一侧，添加其在另一侧的镜像
+                if self._is_point_on_side(h, fold_line, current_paper):
+                    mirrored_hole = self._mirror_point(h, fold_line)
+                    new_holes.append(mirrored_hole)
+
+            # 添加新发现的孔
+            all_holes.extend(new_holes)
+
+        # 过滤掉不在原始纸张上的孔
+        valid_holes = [h for h in all_holes if original_paper.contains(h)]
+
+        # 绘制原始纸张和所有孔
+        fig, ax = plt.subplots(figsize=(8, 8))
+
+        # 绘制网格
+        for i in range(self.grid_size + 1):
+            ax.axhline(y=i, color='gray', linestyle='-', alpha=0.3)
+            ax.axvline(x=i, color='gray', linestyle='-', alpha=0.3)
+
+        # 绘制原始纸张
+        x, y = original_paper.exterior.xy
+        ax.fill(x, y, alpha=0.5, fc='lightblue', ec='blue')
+
+        # 绘制所有孔
+        for h in valid_holes:
+            hole = Circle((h.x, h.y), 0.1, color='red')
+            ax.add_patch(hole)
+
+        # 设置图形属性
+        ax.set_xlim(-1, self.grid_size + 1)
+        ax.set_ylim(-1, self.grid_size + 1)
+        ax.set_aspect('equal')
+        ax.set_title(f'展开图：{len(valid_holes)}个孔')
+
+        # 保存图像
+        plt.savefig(os.path.join(self.output_dir, 'unfolded_with_holes.png'))
+        plt.close()
+
+        return valid_holes
+
+    def _is_point_on_side(self, point, line, reference_polygon):
+        """
+        判断点是否在折叠线的一侧（与参考多边形同侧）
+        返回True表示点在参考多边形一侧，False表示点在折叠线上或另一侧
+        """
+        # 获取折叠线的两个点
+        line_coords = list(line.coords)
+        p1, p2 = line_coords[0], line_coords[1]
+
+        # 计算折叠线的方程 Ax + By + C = 0
+        A = p2[1] - p1[1]
+        B = p1[0] - p2[0]
+        C = p2[0] * p1[1] - p1[0] * p2[1]
+
+        # 计算点到线的有符号距离
+        dist = (A * point.x + B * point.y + C) / math.sqrt(A ** 2 + B ** 2)
+
+        # 获取参考多边形上的一个点
+        if reference_polygon.geom_type == 'Polygon':
+            ref_point = Point(reference_polygon.exterior.coords[0])
+        else:  # MultiPolygon
+            ref_point = Point(reference_polygon.geoms[0].exterior.coords[0])
+
+        # 计算参考点到线的有符号距离
+        ref_dist = (A * ref_point.x + B * ref_point.y + C) / math.sqrt(A ** 2 + B ** 2)
+
+        # 如果两个距离的符号相同，则点在参考多边形同侧
+        return (dist * ref_dist > 0)
+
+    def _mirror_point(self, point, axis):
+        """沿着给定的轴镜像点"""
+        # 获取轴的两个点
+        axis_coords = list(axis.coords)
+        p1, p2 = axis_coords[0], axis_coords[1]
+
+        # 计算轴的方向向量
+        dx = p2[0] - p1[0]
+        dy = p2[1] - p1[1]
+
+        # 计算轴的角度（相对于x轴）
+        angle = math.atan2(dy, dx) * 180 / math.pi
+
+        # 将点平移，使轴通过原点
+        translated_point = translate(point, -p1[0], -p1[1])
+
+        # 旋转点，使轴与x轴对齐
+        rotated_point = rotate(translated_point, -angle, origin=(0, 0))
+
+        # 沿x轴镜像（即y坐标取反）
+        mirrored_x = rotated_point.x
+        mirrored_y = -rotated_point.y
+        mirrored_point = Point(mirrored_x, mirrored_y)
+
+        # 旋转回原来的角度
+        rotated_back = rotate(mirrored_point, angle, origin=(0, 0))
+
+        # 平移回原来的位置
+        final_point = translate(rotated_back, p1[0], p1[1])
+
+        return final_point
+
+
+# 使用示例
+if __name__ == "__main__":
+    # 创建折纸模拟器
+    folder = EnhancedPaperFolder(grid_size=6)
+
+    # 执行随机折叠
+    num_folds = random.randint(1,3)
+    print(f"执行{num_folds}次随机折叠...")
+    folder.random_fold(num_folds)
+
+    # 打孔
+    print("在纸张上随机打孔...")
+    hole_coords = folder.punch_hole()
+
+    if hole_coords:
+        print(f"孔的坐标: {hole_coords}")
+
+        # 展开并显示所有孔
+        print("展开纸张并显示所有孔...")
+        all_holes = folder.unfold_and_show_holes(hole_coords)
+        print(f"展开后共有{len(all_holes)}个孔")
     else:
-        print("No valid spots to punch after forced folds.")
-        sim_test._plot_state("Final State After Forced Folds (No Punch)")
-        sim_test.unfold()
-
-    # Run a random simulation as well
-    # print("\n--- Running Random Simulation ---")
-    # simulator_random = GridPaperSimulatorFoldedEdges(size=6, output_dir="folding_simulation_output_edges_random")
-    # simulator_random.run_simulation(num_folds=3)
-
-
-except ValueError as e:
-    print(f"Initialization Error: {e}")
-except Exception as e:
-    print(f"An unexpected error occurred during simulation: {e}")
-    import traceback
-    traceback.print_exc()
+        print("打孔失败")
