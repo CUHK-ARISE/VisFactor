@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMeMF9cvNYYx2pThL4Qkgw41qVxc",
+    "object": "chat.completion",
+    "created": 1747053262,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows a circular shape with a curved line resembling a stem and a smaller curved line at the bottom resembling a leaf. These features suggest that the incomplete drawing represents a fruit, specifically a peach.\n\n{\"answer\": \"peach\"}",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 48,
+        "total_tokens": 1105,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

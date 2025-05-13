@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMcbjJpGORgdbAJMfEJaJfIEukhu",
+    "object": "chat.completion",
+    "created": 1747053153,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows a partially obscured bottle-like shape with a cap and the word \"Yakult\" visible. This suggests it is a Yakult bottle, a popular probiotic drink.\n\n```json\n{\"answer\": \"Yakult bottle\"}\n```",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 50,
+        "total_tokens": 1107,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_54a7450dfc"
+}

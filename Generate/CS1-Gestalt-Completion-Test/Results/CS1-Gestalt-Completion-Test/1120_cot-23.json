@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMdn9VMoCFyvgKF7P8XcXfyPmbxT",
+    "object": "chat.completion",
+    "created": 1747053227,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows an incomplete drawing with visible petals, a stem, and a central part resembling the structure of a flower. Based on these elements, the missing parts can be imagined to complete the picture of a flower.\n\n```json\n{\"answer\": \"flower\"}\n```",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 54,
+        "total_tokens": 1111,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

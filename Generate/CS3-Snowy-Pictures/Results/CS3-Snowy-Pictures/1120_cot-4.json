@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMymQzW4Hch1uLHBZh16jO5KIxDS",
+    "object": "chat.completion",
+    "created": 1747054528,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows a drawing of an apple with a stem and a leaf, obscured by noise. The outline of the apple is clear enough to identify it as an apple.\n\n{\"answer\": \"apple\"}",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1098,
+        "completion_tokens": 42,
+        "total_tokens": 1140,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

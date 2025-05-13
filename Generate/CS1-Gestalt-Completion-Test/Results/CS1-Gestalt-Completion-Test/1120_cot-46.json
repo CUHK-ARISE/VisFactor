@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMf8csWsuQXxJa4RLOQT6U6GfsJ5",
+    "object": "chat.completion",
+    "created": 1747053310,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows a rectangular shape with a screen-like area and two knobs on the side, resembling an old-fashioned television. Despite the missing parts, the overall structure suggests it is a TV.\n\n{\"answer\": \"television\"}",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 46,
+        "total_tokens": 1103,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

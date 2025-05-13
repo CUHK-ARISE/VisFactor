@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMdk6AlFinQrgkhY4yD4rlrRj5Jb",
+    "object": "chat.completion",
+    "created": 1747053224,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows an incomplete drawing of a fish. The visible parts include the eye, fins, and the outline of the body, which strongly suggest that it is a fish.\n\n```json\n{\"answer\": \"fish\"}\n```",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 46,
+        "total_tokens": 1103,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWN0hLEq7L0V57RuKqExbsYxsRd1Q",
+    "object": "chat.completion",
+    "created": 1747054647,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows a circular shape with lines radiating outward from the center, resembling the spokes of a wheel. This pattern is indicative of a wheel or something similar.\n\n{\"answer\": \"wheel\"}",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1098,
+        "completion_tokens": 40,
+        "total_tokens": 1138,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

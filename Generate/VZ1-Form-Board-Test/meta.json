@@ -1,0 +1,137 @@
+{
+    "VZ1": {
+        "Name": "Form-Board-Test",
+        "Example": [
+            [
+                "Text",
+                "Look at the example below."
+            ],
+            [
+                "Image",
+                "../../Images/VZ1-Form-Board-Test/Example/1.jpg"
+            ],
+            [
+                "Image",
+                "../../Images/VZ1-Form-Board-Test/Example/2.jpg"
+            ],
+            [
+                "Text",
+                "The rectangle can be made from the first, third, fourth, and fifth pieces. The second piece is not needed to make the rectangle. Therefore, the answer is [+, -, +, +, +]. The rectangle drawn below shows one way in which the four pieces could be put together."
+            ],
+            [
+                "Image",
+                "../../Images/VZ1-Form-Board-Test/Example/3.jpg"
+            ],
+            [
+                "Text",
+                "Look at the example below."
+            ],
+            [
+                "Image",
+                "../../Images/VZ1-Form-Board-Test/Example/1.jpg"
+            ],
+            [
+                "Image",
+                "../../Images/VZ1-Form-Board-Test/Example/4.jpg"
+            ],
+            [
+                "Text",
+                "The first, fourth, and fifth pieces are needed. The answer is [+, -, -, +, +]."
+            ],
+            [
+                "Text",
+                "Look at the example below."
+            ],
+            [
+                "Image",
+                "../../Images/VZ1-Form-Board-Test/Example/1.jpg"
+            ],
+            [
+                "Image",
+                "../../Images/VZ1-Form-Board-Test/Example/5.jpg"
+            ],
+            [
+                "Text",
+                "The second, third, and fifth pieces are needed. The answer is [-, +, +, -, +]."
+            ]
+        ],
+        "Group": {
+            "Description": "This is a test of your ability to tell what pieces can be put together to make a certain figure. Each problem consists of one geometrical figure and another figure of a row of five shaded pieces. Any number of shaded pieces, from two to five, may be used to make the complete figure. Each piece may be turned around to any position but it cannot be turned over. It may help you to sketch the way the pieces fit together. You may use any blank space for doing this. Your task is to decide which of the five shaded pieces will make the complete figure when put together.",
+            "Instruction": "For the question below: Answer \"-\" if the piece is not used and answer \"+\" if the piece is used. Your answer will be a list of five \"-\" or \"+\". Please provide your answer in the following JSON format: {\"answer\": [\"list_of_five_-_or_+\"]}.",
+            "Questions": [
+              [
+                  "Images/1-0.png",
+                  "Images/1.png"
+              ],
+              [
+                  "Images/2-0.png",
+                  "Images/2.png"
+              ],
+              [
+                  "Images/3-0.png",
+                  "Images/3.png"
+              ],
+              [
+                  "Images/4-0.png",
+                  "Images/4.png"
+              ],
+              [
+                  "Images/5-0.png",
+                  "Images/5.png"
+              ],
+              [
+                  "Images/6-0.png",
+                  "Images/6.png"
+              ],
+              [
+                  "Images/7-0.png",
+                  "Images/7.png"
+              ],
+              [
+                  "Images/8-0.png",
+                  "Images/8.png"
+              ],
+              [
+                  "Images/9-0.png",
+                  "Images/9.png"
+              ],
+              [
+                  "Images/10-0.png",
+                  "Images/10.png"
+              ]
+            ],
+            "Answers": [
+              [
+                  "+","-","-","+","+"
+              ],
+              [
+                  "+","+","+","-","-"
+              ],
+              [
+                  "+","+","-","-","+"
+              ],
+              [
+                  "+","-","+","+","-"
+              ],
+              [
+                  "-","-","+","+","+"
+              ],
+              [
+                  "-","+","+","+","-"
+              ],
+              [
+                  "-","-","+","+","+"
+              ],
+              [
+                  "+","-","+","-","+"
+              ],
+              [
+                  "-","+","+","-","+"
+              ],
+              [
+                  "-","+","+","+","-"
+              ]
+            ]
+        }
+    }
+}

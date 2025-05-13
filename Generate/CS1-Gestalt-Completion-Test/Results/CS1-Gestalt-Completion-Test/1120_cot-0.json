@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMcUmk2NtaGMxmBgm8lOAOwTRVJp",
+    "object": "chat.completion",
+    "created": 1747053146,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows a partially drawn object with a rounded shape and a stem at the top. The overall structure and the stem suggest that it is a pumpkin.\n\n```json\n{\"answer\": \"pumpkin\"}\n```",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 43,
+        "total_tokens": 1100,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

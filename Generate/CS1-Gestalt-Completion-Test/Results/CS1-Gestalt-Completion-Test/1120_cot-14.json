@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMdKyll2j9xngwRPRKzWdlo4WBTK",
+    "object": "chat.completion",
+    "created": 1747053198,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows a layered structure with candles on top, which is commonly associated with a birthday cake. Despite the missing parts, the overall shape and details suggest it is a cake.\n\n```json\n{\"answer\": \"cake\"}\n```",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 47,
+        "total_tokens": 1104,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWN0DXXrRQWitps3vOcDaSWlqkP78",
+    "object": "chat.completion",
+    "created": 1747054617,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image contains a pattern of black and white shapes that resemble a soccer ball. The hexagonal and pentagonal shapes, along with the circular outline, are characteristic of a soccer ball.\n\n{\"answer\": \"soccer_ball\"}",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1098,
+        "completion_tokens": 46,
+        "total_tokens": 1144,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

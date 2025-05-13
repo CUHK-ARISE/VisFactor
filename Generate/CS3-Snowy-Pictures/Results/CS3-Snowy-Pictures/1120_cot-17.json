@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMzkjC1equaBS90SgAuP5RlBZ4iE",
+    "object": "chat.completion",
+    "created": 1747054588,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows a partially obscured object with a backrest, seat, and four legs. These features are characteristic of a chair. Despite the visual noise, the structure is identifiable as a chair.\n\n```json\n{\"answer\": \"chair\"}\n```",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1098,
+        "completion_tokens": 51,
+        "total_tokens": 1149,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

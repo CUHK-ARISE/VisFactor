@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMddA8efmMtfZh36euBa5X37qXis",
+    "object": "chat.completion",
+    "created": 1747053217,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image appears to depict a partially drawn ear of corn, with the husk partially peeled back to reveal the kernels. The top of the corn has a tuft of silk, which is characteristic of corn.\n\n{\"answer\": \"corn\"}",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 48,
+        "total_tokens": 1105,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMdQ4slnmN0baPoOeOVIVg8navgx",
+    "object": "chat.completion",
+    "created": 1747053204,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image appears to depict a carrot. The top part resembles the leafy greens of a carrot, and the elongated shape with pointed ends suggests the body of a carrot.\n\n```json\n{\"answer\": \"carrot\"}\n```",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 45,
+        "total_tokens": 1102,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_54a7450dfc"
+}
