@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMf2L3to37QMtlkypVkgQrkz82n4",
+    "object": "chat.completion",
+    "created": 1747053304,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image appears to be an incomplete drawing of a strawberry. The curved outline, small dots resembling seeds, and the leafy top suggest this interpretation.\n\n{\"answer\": \"strawberry\"}",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 38,
+        "total_tokens": 1095,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

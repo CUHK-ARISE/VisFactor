@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMeRE37NrK57Z6G8RA1V8pomS4Ut",
+    "object": "chat.completion",
+    "created": 1747053267,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows an incomplete outline of a shape that resembles a pear. The curved outline and the small dots inside suggest the appearance of a fruit, specifically a pear.\n\n```json\n{\"answer\": \"pear\"}\n```",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 44,
+        "total_tokens": 1101,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_54a7450dfc"
+}

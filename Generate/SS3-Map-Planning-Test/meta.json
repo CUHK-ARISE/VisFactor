@@ -1,0 +1,310 @@
+{
+    "SS3": {
+        "Name": "Map-Planning-Test",
+        "Example": [
+            [
+                "Text",
+                "Look at the sample map below. Practice by finding the shortest route between the various points listed at the right of the map."
+            ],
+            [
+                "Image",
+                "../../Images/SS3-Map-Planning-Test/Example/1.jpg"
+            ],
+            [
+                "Text",
+                "The answers to the other practice problems are as follows: 1. The shortest route from A to Z passes 1 buildings; 2. The shortest route from E to S passes 5 buildings; 3. The shortest route from P to J passes 3 buildings; 4. The shortest route from V to K passes 2 buildings; 5. The shortest route from O to F passes 4 buildings; 6. The shortest route from G to M passes 4 buildings; 7. The shortest route from D to Q passes 6 buildings; 8. The shortest route from F to T passes 5 buildings."
+            ]
+        ],
+        "Group": {
+            "Description": "There may be many shortest routes, choose the one that passes through the highest number of buildings. Rules 1. A route is not considered to pass a building if it passes only one corner and not one side. 2. The same numbered building can be used for more than one route. You need to find the shortest route between two lettered points. The number of buildings passed is your answer.",
+            "Instruction": "For the question below: Answer the number of buildings that the shortest route passes. Please provide your answer in the following JSON format: {\"answer\": \"a_number\"}.",
+            "Additional": [
+                [
+                    "How many buildings does the shortest route from F to I pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from U to D pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from B to W pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from Z to E pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from C to K pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from X to L pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from Y to R pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from M to J pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from P to M pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from N to T pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from U to B pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from E to Q pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from S to X pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from Y to P pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from Y to G pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from F to L pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from A to E pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from K to D pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from Q to C pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from Z to H pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from Y to R pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from E to X pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from L to F pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from D to K pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from W to L pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from C to W pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from T to B pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from V to P pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from H to F pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from O to Z pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from S to Y pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from X to R pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from L to T pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from I to R pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from V to O pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from J to E pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from K to R pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from F to C pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from R to W pass?"
+                ],
+                [
+                    "How many buildings does the shortest route from D to K pass?"
+                ]
+            ],
+            "Answers": [
+                [1],
+                [2],
+                [2],
+                [0],
+                [3],
+                [1],
+                [2],
+                [1],
+                [3],
+                [0],
+                [3],
+                [4],
+                [2],
+                [5],
+                [2],
+                [0],
+                [0],
+                [0],
+                [3],
+                [1],
+                [2],
+                [3],
+                [0],
+                [3],
+                [1],
+                [1],
+                [0],
+                [1],
+                [0],
+                [3],
+                [2],
+                [2],
+                [2],
+                [5],
+                [2],
+                [1],
+                [3],
+                [0],
+                [3],
+                [3]
+
+            ],
+            "Questions": [
+                [
+                    "Images/1.png"
+                ],
+                [
+                    "Images/1.png"
+                ],
+                [
+                    "Images/1.png"
+                ],
+                [
+                    "Images/1.png"
+                ],
+                [
+                    "Images/1.png"
+                ],
+                [
+                    "Images/1.png"
+                ],
+                [
+                    "Images/1.png"
+                ],
+                [
+                    "Images/1.png"
+                ],
+                [
+                    "Images/1.png"
+                ],
+                [
+                    "Images/1.png"
+                ],
+                [
+                    "Images/2.png"
+                ],
+                [
+                    "Images/2.png"
+                ],
+                [
+                    "Images/2.png"
+                ],
+                [
+                    "Images/2.png"
+                ],
+                [
+                    "Images/2.png"
+                ],
+                [
+                    "Images/2.png"
+                ],
+                [
+                    "Images/2.png"
+                ],
+                [
+                    "Images/2.png"
+                ],
+                [
+                    "Images/2.png"
+                ],
+                [
+                    "Images/2.png"
+                ],
+                [
+                    "Images/3.png"
+                ],
+                [
+                    "Images/3.png"
+                ],
+                [
+                    "Images/3.png"
+                ],
+                [
+                    "Images/3.png"
+                ],
+                [
+                    "Images/3.png"
+                ],
+                [
+                    "Images/3.png"
+                ],
+                [
+                    "Images/3.png"
+                ],
+                [
+                    "Images/3.png"
+                ],
+                [
+                    "Images/3.png"
+                ],
+                [
+                    "Images/3.png"
+                ],
+                [
+                    "Images/4.png"
+                ],
+                [
+                    "Images/4.png"
+                ],
+                [
+                    "Images/4.png"
+                ],
+                [
+                    "Images/4.png"
+                ],
+                [
+                    "Images/4.png"
+                ],
+                [
+                    "Images/4.png"
+                ],
+                [
+                    "Images/4.png"
+                ],
+                [
+                    "Images/4.png"
+                ],
+                [
+                    "Images/4.png"
+                ],
+                [
+                    "Images/4.png"
+                ]
+            ]
+        }
+    }
+}

@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWN0tTxp49xPy9rXH0phqHdTg8Rko",
+    "object": "chat.completion",
+    "created": 1747054659,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows a shape that resembles a pear. The outline of the pear is visible despite the visual noise in the background. The stem and the general shape of the fruit are distinguishable.\n\n```json\n{\"answer\": \"pear\"}\n```",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1098,
+        "completion_tokens": 49,
+        "total_tokens": 1147,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

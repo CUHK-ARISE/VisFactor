@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMcxmZR10a5Kf5vWLt7wW1VaBHL2",
+    "object": "chat.completion",
+    "created": 1747053175,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows a circular shape with curved lines crossing it, resembling the design of a basketball. The missing parts do not obscure the overall impression of the object.\n\n```json\n{\"answer\": \"basketball\"}\n```",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 44,
+        "total_tokens": 1101,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMdqnpGShh9iuiPUDsOPHWOwxVsq",
+    "object": "chat.completion",
+    "created": 1747053230,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image shows a circular shape with black and white patches, resembling the pattern of a soccer ball. Despite the missing parts, the overall structure and pattern suggest it is a soccer ball.\n\n```json\n{\"answer\": \"soccer ball\"}\n```",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 50,
+        "total_tokens": 1107,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWN0xEewYLFtSFV3kvqfb8fHo3DFh",
+    "object": "chat.completion",
+    "created": 1747054663,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image contains a lot of visual noise, but upon careful observation, the outline of a pencil can be discerned. The shape is elongated with a pointed tip, resembling a writing instrument.\n\n```json\n{\"answer\": \"pencil\"}\n```",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1098,
+        "completion_tokens": 50,
+        "total_tokens": 1148,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

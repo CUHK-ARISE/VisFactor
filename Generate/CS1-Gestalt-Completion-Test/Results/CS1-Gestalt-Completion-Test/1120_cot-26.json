@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BWMe3jlVTnspjmq0R5xbnJNtv3oP5",
+    "object": "chat.completion",
+    "created": 1747053243,
+    "model": "gpt-4o-2024-11-20",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "This image appears to depict a light bulb. The curved lines at the top resemble the rounded top of a bulb, and the straight lines at the bottom suggest the base of the bulb.\n\n{\"answer\": \"light bulb\"}",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 1057,
+        "completion_tokens": 45,
+        "total_tokens": 1102,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_3bdddbcbe8"
+}

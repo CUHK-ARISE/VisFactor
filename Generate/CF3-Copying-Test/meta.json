@@ -1,0 +1,223 @@
+{
+    "CF3": {
+        "Name": "Copying-Test",
+        "Example": [
+            [
+                "Text",
+                "Here is a sample item."
+            ],
+            [
+                "Image",
+                "../../Images/CF3-Copying-Test/Example/1.jpg"
+            ],
+            [
+                "Text",
+                "The answer is (5, 3). Here is another sample item. If you think it will help you, try blacking the correct dots first, like this:"
+            ],
+            [
+                "Image",
+                "../../Images/CF3-Copying-Test/Example/2.jpg"
+            ],
+            [
+                "Text",
+                "The answer is (5, 4). Now try the following items."
+            ],
+            [
+                "Image",
+                "../../Images/CF3-Copying-Test/Example/3.jpg"
+            ],
+            [
+                "Text",
+                "The answers are (2, 5), (5, 4), (1, 2), and (5, 2)."
+            ]
+        ],
+        "Group": {
+            "Description": "This is a test of your ability to keep in mind a pattern so that you can quickly find it in a square of dots. You need to solve the problem by copying the pattern on the dots. The copied pattern must start with the circled dot, and every corner must come at one of the dots. When you are finished, it must look exactly like the original pattern. The dots are numbered as: the upper left dot is (1, 1) and the lower right dot is (5, 5), with the first number being the row number and the second number being the column number. You are to decide which dot will the pattern end in when starting from the circled dot.",
+            "Instruction": "For the question below: Answer the (row, column) of the ending dot. Please provide your answer in the following JSON format: {\"answer\": \"(Row_Number, Column_NUmber)\"}.",
+            "Questions": [
+                [
+                    "Images/0.png"
+                ],
+                [
+                    "Images/1.png"
+                ],
+                [
+                    "Images/2.png"
+                ],
+                [
+                    "Images/3.png"
+                ],
+                [
+                    "Images/4.png"
+                ],
+                [
+                    "Images/5.png"
+                ],
+                [
+                    "Images/6.png"
+                ],
+                [
+                    "Images/7.png"
+                ],
+                [
+                    "Images/8.png"
+                ],
+                [
+                    "Images/9.png"
+                ],
+                [
+                    "Images/10.png"
+                ],
+                [
+                    "Images/11.png"
+                ],
+                [
+                    "Images/12.png"
+                ],
+                [
+                    "Images/13.png"
+                ],
+                [
+                    "Images/14.png"
+                ],
+                [
+                    "Images/15.png"
+                ],
+                [
+                    "Images/16.png"
+                ],
+                [
+                    "Images/17.png"
+                ],
+                [
+                    "Images/18.png"
+                ],
+                [
+                    "Images/19.png"
+                ],
+                [
+                    "Images/20.png"
+                ],
+                [
+                    "Images/21.png"
+                ],
+                [
+                    "Images/22.png"
+                ],
+                [
+                    "Images/23.png"
+                ],
+                [
+                    "Images/24.png"
+                ],
+                [
+                    "Images/25.png"
+                ],
+                [
+                    "Images/26.png"
+                ],
+                [
+                    "Images/27.png"
+                ],
+                [
+                    "Images/28.png"
+                ],
+                [
+                    "Images/29.png"
+                ]
+            ],
+            "Answers": [
+                [
+                    "(1, 5)"
+                ],
+                [
+                    "(3, 5)"
+                ],
+                [
+                    "(4, 3)"
+                ],
+                [
+                    "(2, 2)"
+                ],
+                [
+                    "(3, 1)"
+                ],
+                [
+                    "(1, 2)"
+                ],
+                [
+                    "(5, 4)"
+                ],
+                [
+                    "(1, 3)"
+                ],
+                [
+                    "(3, 3)"
+                ],
+                [
+                    "(2, 5)"
+                ],
+                [
+                    "(3, 1)"
+                ],
+                [
+                    "(3, 2)"
+                ],
+                [
+                    "(2, 5)"
+                ],
+                [
+                    "(4, 1)"
+                ],
+                [
+                    "(1, 1)"
+                ],
+                [
+                    "(3, 3)"
+                ],
+                [
+                    "(3, 2)"
+                ],
+                [
+                    "(3, 2)"
+                ],
+                [
+                    "(4, 2)"
+                ],
+                [
+                    "(3, 4)"
+                ],
+                [
+                    "(4, 1)"
+                ],
+                [
+                    "(5, 5)"
+                ],
+                [
+                    "(5, 5)"
+                ],
+                [
+                    "(5, 5)"
+                ],
+                [
+                    "(1, 4)"
+                ],
+                [
+                    "(4, 2)"
+                ],
+                [
+                    "(2, 4)"
+                ],
+                [
+                    "(3, 4)"
+                ],
+                [
+                    "(4, 1)"
+                ],
+                [
+                    "(5, 2)"
+                ]
+            ]
+        }
+    }
+}
