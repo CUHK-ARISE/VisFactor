@@ -183,7 +183,7 @@ def show_pic(base64_string):
 @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(_MAX_TRY))
 def chat(payload):
     time.sleep(_SLEEP)
-    response = requests.post("https://api.openai.com/v1/chat/completions", headers=HEADER, json=payload)
+    response = requests.post("http://152.69.226.145:3000/v1/chat/completions", headers=HEADER, json=payload)
     return response.json()
 
 
@@ -426,11 +426,11 @@ if __name__ == "__main__":
                         )
     parser.add_argument("--key",
                         type=str,
-                        default=''
+                        default='REMOVED_OPENAI_API_KEY'
                         )
     parser.add_argument("--model",
                         type=str,
-                        default='gpt-4o-2024-05-13'
+                        default='gpt-4o-2024-11-20'
                         )
     parser.add_argument("--system",
                         type=str,
@@ -494,21 +494,22 @@ if __name__ == "__main__":
         data = json.load(f)
     transform = [opt.noise, opt.contrast, opt.brightness]
     for test_id, test in data.items():
-        test_prefix = f"Results/{test_id}-{test['Name']}"
+        if test_id == 'CF2':
+            test_prefix = f"Results/{test_id}-{test['Name']}"
 
-        if not os.path.isdir(test_prefix):
-            os.makedirs(test_prefix)
+            if not os.path.isdir(test_prefix):
+                os.makedirs(test_prefix)
 
-        test_prefix += f'/{opt.flag}'
-        
-        do_one_test(
-            test_meta=data[test_id],
-            test_mode=opt.mode,
-            use_example=opt.example,
-            use_cot=opt.cot,
-            test_prefix=test_prefix,
-            use_reverse=opt.reversed,
-            transform=transform,
-            use_geo=opt.Geometric
-        )
+            test_prefix += f'/{opt.flag}'
+
+            do_one_test(
+                test_meta=data[test_id],
+                test_mode=opt.mode,
+                use_example=opt.example,
+                use_cot=opt.cot,
+                test_prefix=test_prefix,
+                use_reverse=opt.reversed,
+                transform=transform,
+                use_geo=opt.Geometric
+            )
 
