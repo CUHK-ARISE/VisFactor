@@ -1,0 +1,105 @@
+{
+  "question_type": "Different_Content_Change",
+  "method": "same_faces_then_modify",
+  "original_same_faces": 3,
+  "changing_face_num": 2,
+  "modified_position": "front",
+  "cube_faces_1": {
+    "1": {
+      "content": "S",
+      "rotation": 0
+    },
+    "2": {
+      "content": "circle",
+      "rotation": 90
+    },
+    "3": {
+      "content": "3",
+      "rotation": 0
+    },
+    "4": {
+      "content": "X",
+      "rotation": 90
+    },
+    "5": {
+      "content": "D",
+      "rotation": 0
+    },
+    "6": {
+      "content": "W",
+      "rotation": 0
+    }
+  },
+  "cube_faces_2": {
+    "1": {
+      "content": "S",
+      "rotation": 0
+    },
+    "2": {
+      "content": "A",
+      "rotation": 90
+    },
+    "3": {
+      "content": "3",
+      "rotation": 0
+    },
+    "4": {
+      "content": "X",
+      "rotation": 90
+    },
+    "5": {
+      "content": "D",
+      "rotation": 0
+    },
+    "6": {
+      "content": "W",
+      "rotation": 0
+    }
+  },
+  "view_1": {
+    "config": [
+      3,
+      90
+    ],
+    "visible_faces": {
+      "front": {
+        "content": "3",
+        "rotation": 90,
+        "face_num": 3
+      },
+      "up": {
+        "content": "circle",
+        "rotation": 180,
+        "face_num": 2
+      },
+      "right": {
+        "content": "S",
+        "rotation": 180,
+        "face_num": 1
+      }
+    }
+  },
+  "view_2": {
+    "config": [
+      2,
+      0
+    ],
+    "visible_faces": {
+      "front": {
+        "content": "A",
+        "rotation": 90,
+        "face_num": 2
+      },
+      "up": {
+        "content": "S",
+        "rotation": 0,
+        "face_num": 1
+      },
+      "right": {
+        "content": "3",
+        "rotation": 0,
+        "face_num": 3
+      }
+    }
+  }
+}

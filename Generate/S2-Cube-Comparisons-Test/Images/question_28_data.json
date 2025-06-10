@@ -1,0 +1,105 @@
+{
+  "question_type": "Different_Content_Change",
+  "method": "same_faces_then_modify",
+  "original_same_faces": 3,
+  "changing_face_num": 5,
+  "modified_position": "right",
+  "cube_faces_1": {
+    "1": {
+      "content": "circle_hollow",
+      "rotation": 0
+    },
+    "2": {
+      "content": "L",
+      "rotation": 0
+    },
+    "3": {
+      "content": "K",
+      "rotation": 180
+    },
+    "4": {
+      "content": "U",
+      "rotation": 90
+    },
+    "5": {
+      "content": "3",
+      "rotation": 180
+    },
+    "6": {
+      "content": "H",
+      "rotation": 180
+    }
+  },
+  "cube_faces_2": {
+    "1": {
+      "content": "circle_hollow",
+      "rotation": 0
+    },
+    "2": {
+      "content": "L",
+      "rotation": 0
+    },
+    "3": {
+      "content": "K",
+      "rotation": 180
+    },
+    "4": {
+      "content": "U",
+      "rotation": 90
+    },
+    "5": {
+      "content": "5",
+      "rotation": 180
+    },
+    "6": {
+      "content": "H",
+      "rotation": 180
+    }
+  },
+  "view_1": {
+    "config": [
+      4,
+      180
+    ],
+    "visible_faces": {
+      "front": {
+        "content": "U",
+        "rotation": 270,
+        "face_num": 4
+      },
+      "up": {
+        "content": "3",
+        "rotation": 0,
+        "face_num": 5
+      },
+      "right": {
+        "content": "H",
+        "rotation": 270,
+        "face_num": 6
+      }
+    }
+  },
+  "view_2": {
+    "config": [
+      6,
+      180
+    ],
+    "visible_faces": {
+      "front": {
+        "content": "H",
+        "rotation": 0,
+        "face_num": 6
+      },
+      "up": {
+        "content": "U",
+        "rotation": 0,
+        "face_num": 4
+      },
+      "right": {
+        "content": "5",
+        "rotation": 180,
+        "face_num": 5
+      }
+    }
+  }
+}
