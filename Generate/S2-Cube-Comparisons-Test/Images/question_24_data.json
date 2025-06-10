@@ -4,73 +4,73 @@
   "target_same_count": 1,
   "cube_faces": {
     "1": {
-      "content": "U",
-      "rotation": 0
+      "content": "Z",
+      "rotation": 180
     },
     "2": {
-      "content": "M",
+      "content": "R",
       "rotation": 180
     },
     "3": {
       "content": "L",
-      "rotation": 180
+      "rotation": 270
     },
     "4": {
-      "content": "Z",
-      "rotation": 180
+      "content": "5",
+      "rotation": 0
     },
     "5": {
-      "content": "S",
-      "rotation": 90
+      "content": "C",
+      "rotation": 270
     },
     "6": {
-      "content": "W",
-      "rotation": 270
+      "content": "4",
+      "rotation": 90
     }
   },
   "view_1": {
     "config": [
       1,
-      90
+      270
     ],
     "visible_faces": {
       "front": {
-        "content": "U",
+        "content": "Z",
         "rotation": 90,
         "face_num": 1
       },
       "up": {
-        "content": "W",
+        "content": "L",
         "rotation": 90,
-        "face_num": 6
+        "face_num": 3
       },
       "right": {
-        "content": "S",
-        "rotation": 180,
-        "face_num": 5
+        "content": "R",
+        "rotation": 90,
+        "face_num": 2
       }
     }
   },
   "view_2": {
     "config": [
       5,
-      0
+      180
     ],
     "visible_faces": {
       "front": {
-        "content": "S",
+        "content": "C",
         "rotation": 90,
         "face_num": 5
       },
       "up": {
         "content": "Z",
-        "rotation": 180,
-        "face_num": 4
+        "rotation": 0,
+        "face_num": 1
       },
       "right": {
-        "content": "L",
-        "rotation": 0,
-        "face_num": 3
+        "content": "4",
+        "rotation": 90,
+        "face_num": 6
       }
     }
   }

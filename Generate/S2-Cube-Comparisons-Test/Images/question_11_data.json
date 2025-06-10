@@ -1,75 +1,75 @@
 {
   "question_type": "Same",
-  "same_face_count": 3,
-  "target_same_count": 3,
+  "same_face_count": 0,
+  "target_same_count": 0,
   "cube_faces": {
     "1": {
-      "content": "6",
+      "content": "H",
       "rotation": 90
     },
     "2": {
-      "content": "square_hollow",
-      "rotation": 0
-    },
-    "3": {
-      "content": "7",
-      "rotation": 0
-    },
-    "4": {
-      "content": "G",
+      "content": "1",
       "rotation": 270
     },
-    "5": {
-      "content": "Z",
+    "3": {
+      "content": "X",
       "rotation": 90
     },
-    "6": {
-      "content": "Y",
+    "4": {
+      "content": "U",
       "rotation": 0
+    },
+    "5": {
+      "content": "circle_hollow",
+      "rotation": 270
+    },
+    "6": {
+      "content": "5",
+      "rotation": 270
     }
   },
   "view_1": {
     "config": [
-      5,
-      0
+      4,
+      90
     ],
     "visible_faces": {
       "front": {
-        "content": "Z",
+        "content": "U",
         "rotation": 90,
-        "face_num": 5
-      },
-      "up": {
-        "content": "G",
-        "rotation": 270,
         "face_num": 4
       },
+      "up": {
+        "content": "5",
+        "rotation": 270,
+        "face_num": 6
+      },
       "right": {
-        "content": "7",
-        "rotation": 180,
-        "face_num": 3
+        "content": "1",
+        "rotation": 0,
+        "face_num": 2
       }
     }
   },
   "view_2": {
     "config": [
-      4,
-      270
+      3,
+      0
     ],
     "visible_faces": {
       "front": {
-        "content": "G",
-        "rotation": 180,
-        "face_num": 4
-      },
-      "up": {
-        "content": "7",
-        "rotation": 0,
+        "content": "X",
+        "rotation": 90,
         "face_num": 3
       },
+      "up": {
+        "content": "H",
+        "rotation": 180,
+        "face_num": 1
+      },
       "right": {
-        "content": "Z",
-        "rotation": 0,
+        "content": "circle_hollow",
+        "rotation": 90,
         "face_num": 5
       }
     }
