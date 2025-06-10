@@ -2,7 +2,7 @@ import random
 import json
 import os
 import cv2
-from tmo import draw_cube
+from DrawCube import draw_cube
 
 class CubeQuestionGenerator:
     def __init__(self):
@@ -198,7 +198,7 @@ class CubeQuestionGenerator:
         with open(os.path.join(self.output_dir, f"question_{question_num}_data.json"), "w", encoding="utf-8") as f:
             json.dump(question_data, f, ensure_ascii=False, indent=2)
         
-        return "Same", cube_faces, visible_1, visible_2
+        return "S", cube_faces, visible_1, visible_2
     
     def generate_different_question_content_change(self, question_num, fixed_faces=None):
         """
@@ -292,7 +292,7 @@ class CubeQuestionGenerator:
         with open(os.path.join(self.output_dir, f"question_{question_num}_data.json"), "w", encoding="utf-8") as f:
             json.dump(question_data, f, ensure_ascii=False, indent=2)
         
-        return "Different", cube_faces_1, visible_1, visible_2
+        return "D", cube_faces_1, visible_1, visible_2
 
     def generate_different_question_rotation_only(self, question_num):
         """Generate different cube question: create difference only through rotation"""
@@ -365,7 +365,7 @@ class CubeQuestionGenerator:
         with open(os.path.join(self.output_dir, f"question_{question_num}_data.json"), "w", encoding="utf-8") as f:
             json.dump(question_data, f, ensure_ascii=False, indent=2)
         
-        return "Different", cube_faces_1, visible_1, visible_2
+        return "D", cube_faces_1, visible_1, visible_2
     
     def generate_cube_image(self, visible_faces, filename):
         """Generate cube image"""
@@ -429,7 +429,7 @@ class CubeQuestionGenerator:
             questions.append([f"./Images/{i}-0.jpg", f"./Images/{i}-1.jpg"])
             answers.append([answer])
         
-        # Save overall meta.json file
+        # Save overall meta.json file to current directory
         result = {
             "Questions": questions,
             "Answers": answers,
@@ -446,6 +446,7 @@ class CubeQuestionGenerator:
             if count > 0:
                 print(f"{q_type}: {count}")
         print(f"Files saved in: {self.output_dir}/")
+        print(f"meta.json saved in current directory")
 
 def main():
     generator = CubeQuestionGenerator()

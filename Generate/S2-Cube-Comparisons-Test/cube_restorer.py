@@ -1,7 +1,7 @@
 import json
 import os
 import cv2
-from tmo import draw_cube
+from DrawCube import draw_cube
 
 class CubeRestorer:
     def __init__(self, images_dir="Images"):
