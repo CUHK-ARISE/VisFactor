@@ -230,15 +230,71 @@ def update_meta_json():
         with open(meta_path, 'r', encoding='utf-8') as f:
             meta_data = json.load(f)
     else:
-        meta_data = {"Questions": [], "Answers": []}
+        # 如果没有现有文件，创建基本结构
+        meta_data = {
+            "S2": {
+                "Name": "Cube-Comparisons-Test",
+                "Example": [
+                    [
+                        "Text",
+                        "Compare the two cubes in the pair below."
+                    ],
+                    [
+                        "Image",
+                        "../../Images/S2-Cube-Comparisons-Test/Example/1.jpg"
+                    ],
+                    [
+                        "Text",
+                        "The pair is different because they must be drawings of different cubes. If the left cube is turned so that the A is upright and facing you, the N would be to the left of the A and hidden, not to the right of the A as is shown on the right hand member of the pair. Thus, the drawings must be of different cubes. Compare the two cubes in the pair below."
+                    ],
+                    [
+                        "Image",
+                        "../../Images/S2-Cube-Comparisons-Test/Example/2.jpg"
+                    ],
+                    [
+                        "Text",
+                        "The pair is the same because they could be drawings of the same cube. That is, if the A is turned on its side the X becomes hidden, the B is now on top, and the C (which was hidden) now appears. Thus the two drawings could be of the same cube. Compare the two cubes in the pair below."
+                    ],
+                    [
+                        "Image",
+                        "../../Images/S2-Cube-Comparisons-Test/Example/3.jpg"
+                    ],
+                    [
+                        "Text",
+                        "The pair is different because the X cannot be at the peak of the A on the left hand drawing and at the base of the A on the right hand drawing. Compare the two cubes in the pair below."
+                    ],
+                    [
+                        "Image",
+                        "../../Images/S2-Cube-Comparisons-Test/Example/4.jpg"
+                    ],
+                    [
+                        "Text",
+                        "The pair is different because P has its side next to G on the left hand cube but its top next to G on the right hand cube. Compare the two cubes in the pair below."
+                    ],
+                    [
+                        "Image",
+                        "../../Images/S2-Cube-Comparisons-Test/Example/5.jpg"
+                    ],
+                    [
+                        "Text",
+                        "The pair is the same because the J and K are just turned on their side, moving the O to the top."
+                    ]
+                ],
+                "Group": {
+                    "Description": "Wooden blocks such as children play with are often cubical with a different letter, number, or symbol on each of the six faces (top, bottom, four sides). Each problem in this test consists of drawings of pairs of cubes or blocks of this kind. Remember, there is a different design, number, or letter on each face of a given cube or block. Note: No letters, numbers, or symbols appear on more than one face of a given cube. Except for that, any letter, number or symbol can be on the hidden faces of a cube. You are to decide whether the two cubes are the same or different after applying some rotations.",
+                    "Instruction": "For the question below: Answer \"S\" if the two cubes are the same. Answer \"D\" if the two cubes are different. Please provide your answer in the following JSON format: {\"answer\": \"S_or_D\"}.",
+                    "Answers": [],
+                    "Questions": []
+                }
+            }
+        }
     
     # 获取原始答案数据以保持一致性
-    original_answers = meta_data.get("Answers", [])
-    original_question_counts = meta_data.get("Question_Counts", {})
+    original_answers = meta_data["S2"]["Group"].get("Answers", [])
     
     # 清空现有的Questions和Answers
-    meta_data["Questions"] = []
-    meta_data["Answers"] = []
+    meta_data["S2"]["Group"]["Questions"] = []
+    meta_data["S2"]["Group"]["Answers"] = []
     
     # 生成新的Questions和Answers
     num_pairs = len(image_pairs)
@@ -254,44 +310,40 @@ def update_meta_json():
                 original_answer = [original_answers[idx]]
         
         # 原始图片
-        meta_data["Questions"].append([
+        meta_data["S2"]["Group"]["Questions"].append([
             f"./Images/{original_n}-0.jpg",
             f"./Images/{original_n}-1.jpg"
         ])
-        meta_data["Answers"].append(original_answer)
+        meta_data["S2"]["Group"]["Answers"].append(original_answer)
         
         # 4个变换版本（答案相同）
         for i in range(4):
             transformed_n = original_n + (i + 1) * num_pairs
-            meta_data["Questions"].append([
+            meta_data["S2"]["Group"]["Questions"].append([
                 f"./Images/{transformed_n}-0.jpg",
                 f"./Images/{transformed_n}-1.jpg"
             ])
-            meta_data["Answers"].append(original_answer)
+            meta_data["S2"]["Group"]["Answers"].append(original_answer)
         
         # 第6组（答案相反）
         sixth_group_n = original_n + 5 * num_pairs
-        meta_data["Questions"].append([
+        meta_data["S2"]["Group"]["Questions"].append([
             f"./Images/{sixth_group_n}-0.jpg",
             f"./Images/{sixth_group_n}-1.jpg"
         ])
         # 生成相反的答案
         opposite_answer = ["D"] if original_answer[0] == "S" else ["S"]
-        meta_data["Answers"].append(opposite_answer)
-    
-    # 保存其他元数据
-    if original_question_counts:
-        meta_data["Question_Counts"] = original_question_counts
+        meta_data["S2"]["Group"]["Answers"].append(opposite_answer)
     
     # 更新总问题数
-    meta_data["Total_Questions"] = len(meta_data["Questions"])
+    meta_data["S2"]["Group"]["Total_Questions"] = len(meta_data["S2"]["Group"]["Questions"])
     
     # 保存更新后的meta.json到当前目录
     with open(meta_path, 'w', encoding='utf-8') as f:
         json.dump(meta_data, f, indent=2, ensure_ascii=False)
     
-    print(f"Updated meta.json with {len(meta_data['Questions'])} questions")
-    print(f"Answer format example: {meta_data['Answers'][0] if meta_data['Answers'] else 'No answers'}")
+    print(f"Updated meta.json with {len(meta_data['S2']['Group']['Questions'])} questions")
+    print(f"Answer format example: {meta_data['S2']['Group']['Answers'][0] if meta_data['S2']['Group']['Answers'] else 'No answers'}")
     print(f"meta.json saved in current directory")
 
 # 执行meta.json更新
