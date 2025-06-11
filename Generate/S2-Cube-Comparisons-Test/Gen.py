@@ -429,12 +429,63 @@ class CubeQuestionGenerator:
             questions.append([f"./Images/{i}-0.jpg", f"./Images/{i}-1.jpg"])
             answers.append([answer])
         
-        # Save overall meta.json file to current directory
+        # Save meta.json file in the required format
         result = {
-            "Questions": questions,
-            "Answers": answers,
-            "Question_Counts": question_counts,
-            "Total_Questions": total_questions
+            "S2": {
+                "Name": "Cube-Comparisons-Test",
+                "Example": [
+                    [
+                        "Text",
+                        "Compare the two cubes in the pair below."
+                    ],
+                    [
+                        "Image",
+                        "../../Images/S2-Cube-Comparisons-Test/Example/1.jpg"
+                    ],
+                    [
+                        "Text",
+                        "The pair is different because they must be drawings of different cubes. If the left cube is turned so that the A is upright and facing you, the N would be to the left of the A and hidden, not to the right of the A as is shown on the right hand member of the pair. Thus, the drawings must be of different cubes. Compare the two cubes in the pair below."
+                    ],
+                    [
+                        "Image",
+                        "../../Images/S2-Cube-Comparisons-Test/Example/2.jpg"
+                    ],
+                    [
+                        "Text",
+                        "The pair is the same because they could be drawings of the same cube. That is, if the A is turned on its side the X becomes hidden, the B is now on top, and the C (which was hidden) now appears. Thus the two drawings could be of the same cube. Compare the two cubes in the pair below."
+                    ],
+                    [
+                        "Image",
+                        "../../Images/S2-Cube-Comparisons-Test/Example/3.jpg"
+                    ],
+                    [
+                        "Text",
+                        "The pair is different because the X cannot be at the peak of the A on the left hand drawing and at the base of the A on the right hand drawing. Compare the two cubes in the pair below."
+                    ],
+                    [
+                        "Image",
+                        "../../Images/S2-Cube-Comparisons-Test/Example/4.jpg"
+                    ],
+                    [
+                        "Text",
+                        "The pair is different because P has its side next to G on the left hand cube but its top next to G on the right hand cube. Compare the two cubes in the pair below."
+                    ],
+                    [
+                        "Image",
+                        "../../Images/S2-Cube-Comparisons-Test/Example/5.jpg"
+                    ],
+                    [
+                        "Text",
+                        "The pair is the same because the J and K are just turned on their side, moving the O to the top."
+                    ]
+                ],
+                "Group": {
+                    "Description": "Wooden blocks such as children play with are often cubical with a different letter, number, or symbol on each of the six faces (top, bottom, four sides). Each problem in this test consists of drawings of pairs of cubes or blocks of this kind. Remember, there is a different design, number, or letter on each face of a given cube or block. Note: No letters, numbers, or symbols appear on more than one face of a given cube. Except for that, any letter, number or symbol can be on the hidden faces of a cube. You are to decide whether the two cubes are the same or different after applying some rotations.",
+                    "Instruction": "For the question below: Answer \"S\" if the two cubes are the same. Answer \"D\" if the two cubes are different. Please provide your answer in the following JSON format: {\"answer\": \"S_or_D\"}.",
+                    "Answers": answers,
+                    "Questions": questions
+                }
+            }
         }
         
         with open("meta.json", "w", encoding="utf-8") as f:

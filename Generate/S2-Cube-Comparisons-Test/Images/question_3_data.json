@@ -1,76 +1,76 @@
 {
   "question_type": "Same",
-  "same_face_count": 2,
-  "target_same_count": 2,
+  "same_face_count": 0,
+  "target_same_count": 0,
   "cube_faces": {
     "1": {
-      "content": "X",
-      "rotation": 180
+      "content": "3",
+      "rotation": 0
     },
     "2": {
+      "content": "R",
+      "rotation": 90
+    },
+    "3": {
       "content": "1",
       "rotation": 180
     },
-    "3": {
-      "content": "7",
-      "rotation": 90
-    },
     "4": {
-      "content": "Y",
+      "content": "P",
       "rotation": 0
     },
     "5": {
-      "content": "Q",
-      "rotation": 270
+      "content": "L",
+      "rotation": 90
     },
     "6": {
-      "content": "circle_hollow",
-      "rotation": 0
+      "content": "Y",
+      "rotation": 180
     }
   },
   "view_1": {
     "config": [
-      2,
-      0
-    ],
-    "visible_faces": {
-      "front": {
-        "content": "1",
-        "rotation": 180,
-        "face_num": 2
-      },
-      "up": {
-        "content": "X",
-        "rotation": 180,
-        "face_num": 1
-      },
-      "right": {
-        "content": "7",
-        "rotation": 90,
-        "face_num": 3
-      }
-    }
-  },
-  "view_2": {
-    "config": [
-      4,
-      0
+      6,
+      180
     ],
     "visible_faces": {
       "front": {
         "content": "Y",
         "rotation": 0,
+        "face_num": 6
+      },
+      "up": {
+        "content": "P",
+        "rotation": 270,
         "face_num": 4
+      },
+      "right": {
+        "content": "L",
+        "rotation": 90,
+        "face_num": 5
+      }
+    }
+  },
+  "view_2": {
+    "config": [
+      1,
+      270
+    ],
+    "visible_faces": {
+      "front": {
+        "content": "3",
+        "rotation": 270,
+        "face_num": 1
       },
       "up": {
         "content": "1",
-        "rotation": 180,
-        "face_num": 2
+        "rotation": 0,
+        "face_num": 3
       },
       "right": {
-        "content": "7",
-        "rotation": 180,
-        "face_num": 3
+        "content": "R",
+        "rotation": 0,
+        "face_num": 2
       }
     }
   }

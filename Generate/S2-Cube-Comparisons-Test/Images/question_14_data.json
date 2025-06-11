@@ -1,103 +1,75 @@
 {
-  "question_type": "Different_Content_Change",
-  "method": "same_faces_then_modify",
-  "original_same_faces": 3,
-  "changing_face_num": 2,
-  "modified_position": "front",
-  "cube_faces_1": {
+  "question_type": "Same",
+  "same_face_count": 1,
+  "target_same_count": 1,
+  "cube_faces": {
     "1": {
-      "content": "Q",
-      "rotation": 180
+      "content": "circle",
+      "rotation": 0
     },
     "2": {
-      "content": "6",
-      "rotation": 90
-    },
-    "3": {
-      "content": "U",
-      "rotation": 180
-    },
-    "4": {
-      "content": "8",
-      "rotation": 90
-    },
-    "5": {
-      "content": "I",
-      "rotation": 270
-    },
-    "6": {
       "content": "4",
       "rotation": 180
-    }
-  },
-  "cube_faces_2": {
-    "1": {
-      "content": "Q",
-      "rotation": 180
-    },
-    "2": {
-      "content": "S",
-      "rotation": 90
     },
     "3": {
-      "content": "U",
-      "rotation": 180
-    },
-    "4": {
-      "content": "8",
-      "rotation": 90
-    },
-    "5": {
-      "content": "I",
+      "content": "0",
       "rotation": 270
     },
+    "4": {
+      "content": "9",
+      "rotation": 270
+    },
+    "5": {
+      "content": "Y",
+      "rotation": 90
+    },
     "6": {
-      "content": "4",
-      "rotation": 180
+      "content": "T",
+      "rotation": 0
     }
   },
   "view_1": {
     "config": [
-      6,
-      270
+      1,
+      0
     ],
     "visible_faces": {
       "front": {
-        "content": "4",
-        "rotation": 90,
-        "face_num": 6
+        "content": "circle",
+        "rotation": 0,
+        "face_num": 1
       },
       "up": {
-        "content": "6",
-        "rotation": 0,
-        "face_num": 2
+        "content": "Y",
+        "rotation": 90,
+        "face_num": 5
       },
       "right": {
-        "content": "8",
-        "rotation": 90,
-        "face_num": 4
+        "content": "0",
+        "rotation": 180,
+        "face_num": 3
       }
     }
   },
   "view_2": {
     "config": [
-      2,
+      1,
       180
     ],
     "visible_faces": {
       "front": {
-        "content": "S",
-        "rotation": 270,
-        "face_num": 2
+        "content": "circle",
+        "rotation": 180,
+        "face_num": 1
       },
       "up": {
-        "content": "8",
-        "rotation": 270,
-        "face_num": 4
-      },
-      "right": {
         "content": "4",
         "rotation": 0,
+        "face_num": 2
+      },
+      "right": {
+        "content": "T",
+        "rotation": 270,
         "face_num": 6
       }
     }

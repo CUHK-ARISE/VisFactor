@@ -4,27 +4,27 @@
   "target_same_count": 3,
   "cube_faces": {
     "1": {
-      "content": "2",
+      "content": "E",
       "rotation": 0
     },
     "2": {
-      "content": "O",
-      "rotation": 90
+      "content": "P",
+      "rotation": 180
     },
     "3": {
-      "content": "P",
+      "content": "3",
       "rotation": 270
     },
     "4": {
-      "content": "1",
-      "rotation": 0
+      "content": "L",
+      "rotation": 270
     },
     "5": {
-      "content": "8",
+      "content": "D",
       "rotation": 0
     },
     "6": {
-      "content": "Y",
+      "content": "J",
       "rotation": 90
     }
   },
@@ -35,17 +35,17 @@
     ],
     "visible_faces": {
       "front": {
-        "content": "1",
-        "rotation": 270,
+        "content": "L",
+        "rotation": 180,
         "face_num": 4
       },
       "up": {
-        "content": "P",
+        "content": "3",
         "rotation": 270,
         "face_num": 3
       },
       "right": {
-        "content": "8",
+        "content": "D",
         "rotation": 270,
         "face_num": 5
       }
@@ -58,18 +58,18 @@
     ],
     "visible_faces": {
       "front": {
-        "content": "P",
+        "content": "3",
         "rotation": 180,
         "face_num": 3
       },
       "up": {
-        "content": "8",
+        "content": "D",
         "rotation": 90,
         "face_num": 5
       },
       "right": {
-        "content": "1",
-        "rotation": 180,
+        "content": "L",
+        "rotation": 90,
         "face_num": 4
       }
     }

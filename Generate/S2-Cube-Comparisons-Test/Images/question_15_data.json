@@ -1,103 +1,99 @@
 {
-  "question_type": "Different_Content_Change",
-  "method": "same_faces_then_modify",
-  "original_same_faces": 3,
-  "changing_face_num": 3,
-  "modified_position": "up",
+  "question_type": "Different_Rotation_Only",
   "cube_faces_1": {
     "1": {
-      "content": "V",
-      "rotation": 0
-    },
-    "2": {
-      "content": "S",
-      "rotation": 270
-    },
-    "3": {
-      "content": "4",
+      "content": "square",
       "rotation": 90
     },
+    "2": {
+      "content": "G",
+      "rotation": 180
+    },
+    "3": {
+      "content": "circle",
+      "rotation": 180
+    },
     "4": {
-      "content": "9",
+      "content": "L",
       "rotation": 0
     },
     "5": {
-      "content": "1",
+      "content": "7",
       "rotation": 270
     },
     "6": {
-      "content": "Q",
-      "rotation": 0
+      "content": "A",
+      "rotation": 90
     }
   },
   "cube_faces_2": {
     "1": {
-      "content": "V",
-      "rotation": 0
+      "content": "square",
+      "rotation": 90
     },
     "2": {
-      "content": "S",
-      "rotation": 270
+      "content": "G",
+      "rotation": 180
     },
     "3": {
-      "content": "P",
-      "rotation": 270
+      "content": "circle",
+      "rotation": 180
     },
     "4": {
-      "content": "9",
-      "rotation": 0
+      "content": "L",
+      "rotation": 90
     },
     "5": {
-      "content": "1",
-      "rotation": 270
+      "content": "7",
+      "rotation": 90
     },
     "6": {
-      "content": "Q",
-      "rotation": 0
+      "content": "A",
+      "rotation": 90
     }
   },
   "view_1": {
     "config": [
-      3,
-      270
+      5,
+      90
     ],
     "visible_faces": {
       "front": {
-        "content": "4",
-        "rotation": 0,
-        "face_num": 3
-      },
-      "up": {
-        "content": "1",
+        "content": "7",
         "rotation": 0,
         "face_num": 5
       },
+      "up": {
+        "content": "A",
+        "rotation": 0,
+        "face_num": 6
+      },
       "right": {
-        "content": "9",
-        "rotation": 180,
+        "content": "L",
+        "rotation": 90,
         "face_num": 4
       }
     }
   },
   "view_2": {
     "config": [
-      4,
-      270
+      6,
+      180
     ],
     "visible_faces": {
       "front": {
-        "content": "9",
+        "content": "A",
         "rotation": 270,
-        "face_num": 4
+        "face_num": 6
       },
       "up": {
-        "content": "P",
-        "rotation": 270,
-        "face_num": 3
+        "content": "L",
+        "rotation": 0,
+        "face_num": 4
       },
       "right": {
-        "content": "1",
-        "rotation": 180,
+        "content": "7",
+        "rotation": 90,
         "face_num": 5
       }
     }

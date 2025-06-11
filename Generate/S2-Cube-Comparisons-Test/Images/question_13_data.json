@@ -1,76 +1,76 @@
 {
   "question_type": "Same",
-  "same_face_count": 1,
-  "target_same_count": 1,
+  "same_face_count": 3,
+  "target_same_count": 3,
   "cube_faces": {
     "1": {
-      "content": "C",
+      "content": "9",
       "rotation": 180
     },
     "2": {
-      "content": "A",
-      "rotation": 0
+      "content": "2",
+      "rotation": 90
     },
     "3": {
-      "content": "7",
-      "rotation": 180
-    },
-    "4": {
-      "content": "circle_hollow",
+      "content": "I",
       "rotation": 0
     },
+    "4": {
+      "content": "6",
+      "rotation": 180
+    },
     "5": {
-      "content": "U",
+      "content": "S",
       "rotation": 0
     },
     "6": {
-      "content": "0",
-      "rotation": 180
+      "content": "E",
+      "rotation": 90
     }
   },
   "view_1": {
     "config": [
-      1,
-      0
+      5,
+      90
     ],
     "visible_faces": {
       "front": {
-        "content": "C",
-        "rotation": 180,
-        "face_num": 1
-      },
-      "up": {
-        "content": "U",
-        "rotation": 0,
+        "content": "S",
+        "rotation": 90,
         "face_num": 5
       },
+      "up": {
+        "content": "E",
+        "rotation": 0,
+        "face_num": 6
+      },
       "right": {
-        "content": "7",
-        "rotation": 90,
-        "face_num": 3
+        "content": "6",
+        "rotation": 270,
+        "face_num": 4
       }
     }
   },
   "view_2": {
     "config": [
       4,
-      0
+      180
     ],
     "visible_faces": {
       "front": {
-        "content": "circle_hollow",
+        "content": "6",
         "rotation": 0,
         "face_num": 4
       },
       "up": {
-        "content": "A",
-        "rotation": 0,
-        "face_num": 2
+        "content": "S",
+        "rotation": 180,
+        "face_num": 5
       },
       "right": {
-        "content": "7",
-        "rotation": 270,
-        "face_num": 3
+        "content": "E",
+        "rotation": 180,
+        "face_num": 6
       }
     }
   }

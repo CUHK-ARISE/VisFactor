@@ -1,76 +1,76 @@
 {
   "question_type": "Same",
-  "same_face_count": 1,
-  "target_same_count": 1,
+  "same_face_count": 2,
+  "target_same_count": 2,
   "cube_faces": {
     "1": {
-      "content": "7",
-      "rotation": 180
-    },
-    "2": {
-      "content": "6",
-      "rotation": 90
-    },
-    "3": {
-      "content": "U",
+      "content": "F",
       "rotation": 0
     },
-    "4": {
-      "content": "9",
+    "2": {
+      "content": "E",
       "rotation": 270
     },
-    "5": {
+    "3": {
+      "content": "V",
+      "rotation": 270
+    },
+    "4": {
       "content": "B",
       "rotation": 180
     },
+    "5": {
+      "content": "O",
+      "rotation": 180
+    },
     "6": {
-      "content": "V",
-      "rotation": 0
+      "content": "7",
+      "rotation": 180
     }
   },
   "view_1": {
-    "config": [
-      1,
-      0
-    ],
-    "visible_faces": {
-      "front": {
-        "content": "7",
-        "rotation": 180,
-        "face_num": 1
-      },
-      "up": {
-        "content": "B",
-        "rotation": 180,
-        "face_num": 5
-      },
-      "right": {
-        "content": "U",
-        "rotation": 270,
-        "face_num": 3
-      }
-    }
-  },
-  "view_2": {
     "config": [
       6,
       0
     ],
     "visible_faces": {
       "front": {
-        "content": "V",
-        "rotation": 0,
+        "content": "7",
+        "rotation": 180,
         "face_num": 6
       },
       "up": {
-        "content": "7",
-        "rotation": 90,
+        "content": "F",
+        "rotation": 270,
         "face_num": 1
       },
       "right": {
-        "content": "6",
-        "rotation": 90,
+        "content": "E",
+        "rotation": 270,
         "face_num": 2
+      }
+    }
+  },
+  "view_2": {
+    "config": [
+      2,
+      0
+    ],
+    "visible_faces": {
+      "front": {
+        "content": "E",
+        "rotation": 270,
+        "face_num": 2
+      },
+      "up": {
+        "content": "F",
+        "rotation": 0,
+        "face_num": 1
+      },
+      "right": {
+        "content": "V",
+        "rotation": 270,
+        "face_num": 3
       }
     }
   }
