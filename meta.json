@@ -16092,8 +16092,16 @@
         "Name": "Shape-Memory-Test",
         "Example": [
             [
+                "Text",
+                "Now look at this sample. Study this picture first."
+            ],
+            [
                 "Image",
                 "Images/MV1-Shape-Memory-Test/Example/1.jpg"
+            ],
+            [
+                "Text",
+                "For each sample picture below, answer Y (Yes) if the picture shows part of the picture you studied or N (No) if the picture is not one you studied."
             ],
             [
                 "Image",
@@ -16106,11 +16114,15 @@
             [
                 "Image",
                 "Images/MV1-Shape-Memory-Test/Example/4.jpg"
+            ],
+            [
+                "Text",
+                "You should have answered N for picture I, Y for picture II, and Y for picture III."
             ]
         ],
-        "Group": {
-            "Description": "",
-            "Instruction": "",
+        "Split": {
+            "Description": "This is a test of your ability to remember a group of shapes and their positions in relation to each other. You will be given a picture of different shapes to study. After you learn the shapes and their orientation, you will be given another picture and asked whether it is the same as part of the shapes in the first picture or whether it is different from those.",
+            "Instruction": "Remember the test pictures will show only a small part of the picture that was studied. Answer Y for pictures that show the same shapes in the same orientation as on the study picture. Answer N for pictures that show different shapes. For the question below: Please answer in the following JSON format: {\"answers\": \"Y_or_N\"}.",
             "Answers": [
                 [
                     "Y"
