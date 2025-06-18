@@ -15749,8 +15749,16 @@
         "Name": "Picture-Number-Test",
         "Example": [
             [
+                "Text",
+                "Here are some practice pictures with numbers."
+            ],
+            [
                 "Image",
                 "Images/MA1-Picture-Number-Test/Example/0.jpg"
+            ],
+            [
+                "Text",
+                "Then you will see pictures like these. For the first picture, the correct number is 10."
             ],
             [
                 "Image",
@@ -15777,9 +15785,9 @@
                 "Images/MA1-Picture-Number-Test/Example/6.jpg"
             ]
         ],
-        "Group": {
-            "Description": "",
-            "Instruction": "",
+        "Split": {
+            "Description": "This is a test of your ability to learn picture-number combinations. You will first study a page of some pictures with numbers. After studying, you will be given a random picture. You will be asked to write down the numbers that go with them.",
+            "Instruction": "For the question below: Please write down the number that you can remember in the following JSON format: {\"answers\": \"a_number\"}.",
             "Answers": [
                 [
                     "49"
