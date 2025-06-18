@@ -16598,8 +16598,16 @@
         "Name": "Map-Memory",
         "Example": [
             [
+                "Text",
+                "Study the sample item below."
+            ],
+            [
                 "Image",
                 "Images/MV3-Map-Memory/Example/1.jpg"
+            ],
+            [
+                "Text",
+                "Then look at the four maps. Which two of these four maps are the ones you saw on the picture before? Answer Y (Yes) for the maps you studied. Answer N (No) for the maps you have not seen before."
             ],
             [
                 "Image",
@@ -16616,11 +16624,15 @@
             [
                 "Image",
                 "Images/MV3-Map-Memory/Example/5.jpg"
+            ],
+            [
+                "Text",
+                "You should answer \"Y\" for the first and third maps, \"N\" under the second and fourth maps."
             ]
         ],
-        "Group": {
-            "Description": "",
-            "Instruction": "",
+        "Split": {
+            "Description": "This is a test of your ability to remember part of a map so that you can recognize it when you see it again. You will be given a picture of different maps to study. After you learn them, you will be given another map and asked whether it is one of the maps in the first picture.",
+            "Instruction": "For each new map, answer Y (Yes) for those you have seen, N (No) for those you have not seen before. For the question below: Please answer in the following JSON format: {\"answers\": \"Y_or_N\"}.",
             "Answers": [
                 [
                     "N"
