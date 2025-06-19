@@ -16815,20 +16815,40 @@
         "Name": "Diagramming-Relationships",
         "Example": [
             [
+                "Text",
+                "For example, if certain specific things, let's say lions, all belong to one larger class of things, let's say animals, you could diagram the situation as follows:"
+            ],
+            [
                 "Image",
                 "Images/RL2-Diagramming-Relationships/Example/1.jpg"
+            ],
+            [
+                "Text",
+                "In these diagrams we do not care about the relative sizes of any of the circles. That is, we are not suggesting here that a relatively large proportion of animals are lions, but we are indicacing that all lions are animals. That is why the circle representing lions is drawn entirely within the circle that represents animals. Now take the relationships among three groups of different things: birds, pets, and trees. These should be diagrammed as follows:"
             ],
             [
                 "Image",
                 "Images/RL2-Diagramming-Relationships/Example/2.jpg"
             ],
             [
+                "Text",
+                "This diagram shows that no trees are either pets or birds, but some birds are pets and some pets are birds. Now look at the five diagrams below. A:"
+            ],
+            [
                 "Image",
                 "Images/RL2-Diagramming-Relationships/Example/3.jpg"
             ],
             [
+                "Text",
+                "B:"
+            ],
+            [
                 "Image",
                 "Images/RL2-Diagramming-Relationships/Example/4.jpg"
+            ],
+            [
+                "Text",
+                "V:"
             ],
             [
                 "Image",
@@ -16836,16 +16856,28 @@
             ],
             [
                 "Text",
-                "Animals, cats, dogs"
+                "D:"
+            ],
+            [
+                "Image",
+                "Images/RL2-Diagramming-Relationships/Example/6.jpg"
             ],
             [
                 "Text",
-                "Desks, furniture, pencils"
+                "E:"
+            ],
+            [
+                "Image",
+                "Images/RL2-Diagramming-Relationships/Example/7.jpg"
+            ],
+            [
+                "Text",
+                "Look at the two questions containing three groups of things: 1. Animals, cats, dogs; 2. Desks, furniture, pencils; To choose from the five lettered diagrams that shows the correct relationships among the three groups of things in each item, your answers should be A and E."
             ]
         ],
-        "Group": {
-            "Description": "",
-            "Instruction": "",
+        "Split": {
+            "Description": "Sometimes the relationships among groups of things are best explained by diagrams that consist of overlapping circles.",
+            "Instruction": "Each question in this test names three groups of things. You are to decide whether the given diagram shows the correct relationships among the three groups of things in each question. If the diagram correctly shows the relationships, answer \"yes\", otherwise, answer \"no\". For the question below: Please answer in the following JSON format: {\"answers\": \"yes_or_no\"}.",
             "Answers": [
                 [
                     "yes"
