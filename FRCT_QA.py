@@ -187,9 +187,7 @@ def chat(payload):
     return response.json()
 
 
-def do_one_test(test_meta, test_mode, use_example, use_cot, test_prefix, use_reverse, transform, use_geo):
-    if test_mode == 'Split' and "Split" not in test_meta.keys():
-        return
+def do_one_test(test_meta, use_example, use_cot, test_prefix, use_reverse, transform, use_geo):
 
     if use_reverse and test_meta["Name"] in ["Map-Planning-Test","Surface-Development-Test","Paper-Folding-Test"]:
         use_reverse = False
@@ -234,8 +232,8 @@ def do_one_test(test_meta, test_mode, use_example, use_cot, test_prefix, use_rev
     gpt_invalid = 0
     all_count = 0
     
-    for i, (q, a) in enumerate(zip(test_meta[test_mode]["Questions"], test_meta[test_mode]["Answers"])):
-        if test_meta["Name"] == "Figure-Classification" and test_mode == 'Split':
+    for i, (q, a) in enumerate(zip(test_meta["Questions"], test_meta["Answers"])):
+        if test_meta["Name"] == "Figure-Classification":
             if use_reverse:
                 a = [a[1]-a[0]+1]
             else:
@@ -257,13 +255,13 @@ def do_one_test(test_meta, test_mode, use_example, use_cot, test_prefix, use_rev
         query_content = [
             {
                 "type": "text",
-                "text": test_meta[test_mode]["Description"]
+                "text": test_meta["Description"]
             }
         ]
         query_content_save = [
             {
                 "type": "text",
-                "text": test_meta[test_mode]["Description"]
+                "text": test_meta["Description"]
             }
         ]
 
@@ -273,7 +271,7 @@ def do_one_test(test_meta, test_mode, use_example, use_cot, test_prefix, use_rev
             query_content_save += example_content_save
 
         # Instructions
-        instruction = test_meta[test_mode]["Instruction"]
+        instruction = test_meta["Instruction"]
         if use_cot:
             instruction = instruction.replace('Please provide your answer', 'Let\'s think step by step. Please first give your explanation then provide your answer')
         query_content.append(
@@ -320,17 +318,17 @@ def do_one_test(test_meta, test_mode, use_example, use_cot, test_prefix, use_rev
                 }
             )
 
-        if test_meta["Name"] in ["Map-Planning-Test", "Surface-Development-Test"] and test_mode == "Split":
+        if test_meta["Name"] in ["Map-Planning-Test", "Surface-Development-Test"]:
             query_content.append(
                 {
                     "type": "text",
-                    "text": test_meta[test_mode]["Additional"][i][0]
+                    "text": test_meta["Additional"][i][0]
                 }
             )
             query_content_save.append(
                 {
                     "type": "text",
-                    "text": test_meta[test_mode]["Additional"][i][0]
+                    "text": test_meta["Additional"][i][0]
                 }
             )
 
@@ -407,15 +405,10 @@ if __name__ == "__main__":
                         )
     parser.add_argument("--flag",
                         type=str,
-                        default="gpt4o-example-cot-group-0",
+                        default="gpt4o-example-0",
                         help="name of this run",
                         )
-    parser.add_argument("--mode",
-                        type=str,
-                        choices=['Split', 'Group'],
-                        default="Group",
-                        help="Split or Group",
-                        )
+                        
     parser.add_argument("--example",
                         action='store_true',
                         help="whether to provide example",
@@ -446,7 +439,7 @@ if __name__ == "__main__":
                         )
     parser.add_argument("--reversed",
                         action='store_true',
-                        help="whether to reverse the images (only valid in Split mode)"
+                        help="whether to reverse the images"
                         )
     parser.add_argument("--noise",
                         type=float,
@@ -465,9 +458,6 @@ if __name__ == "__main__":
                         help="whether to do geometric transformation."
                         )
     opt = parser.parse_args()
-
-    if opt.mode == 'Group' and opt.reversed:
-        parser.error("--reversed is only valid when mode is 'Split'.")
     
     QA_TEMPLATE = {
         "model": opt.model,
@@ -504,7 +494,6 @@ if __name__ == "__main__":
 
             do_one_test(
                 test_meta=data[test_id],
-                test_mode=opt.mode,
                 use_example=opt.example,
                 use_cot=opt.cot,
                 test_prefix=test_prefix,
