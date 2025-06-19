@@ -16395,7 +16395,7 @@
         ],
         "Split": {
             "Description": "This is a test of your ability to remember the position of things on a street map. You will be given a map with streets and buildings and other structures to study. After you learn the street layout and the different kinds of structures, you will be given an empty street map and a picture of a structure. You will be asked where the structure was located on the study map.",
-            "Instruction": "For the question below: Please answer in the following JSON format: {\"answers\": \"A_or_B_or_C_or_D_or_E\"}.",
+            "Instruction": "For the question below: Please answer in the following JSON format: {\"answers\": \"yes_or_no\"}.",
             "Answers": [
                 [
                     "A"
