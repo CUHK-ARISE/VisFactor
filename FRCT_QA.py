@@ -318,7 +318,7 @@ def do_one_test(test_meta, use_example, use_cot, test_prefix, use_reverse, trans
                 }
             )
 
-        if test_meta["Name"] in ["Map-Planning-Test", "Surface-Development-Test"]:
+        if test_meta["Name"] in ["Map-Planning-Test", "Surface-Development-Test", "Building-Memory", "Diagramming-Relationships"]:
             query_content.append(
                 {
                     "type": "text",
