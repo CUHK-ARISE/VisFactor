@@ -484,7 +484,7 @@ if __name__ == "__main__":
         data = json.load(f)
     transform = [opt.noise, opt.contrast, opt.brightness]
     for test_id, test in data.items():
-        if test_id == 'CF2':
+        if test_id == 'SS3':
             test_prefix = f"Results/{test_id}-{test['Name']}"
 
             if not os.path.isdir(test_prefix):
