@@ -15761,7 +15761,7 @@
             ]
         ],
         "Description": "This is a test of your ability to learn picture-number combinations. You will first study a page of some pictures with numbers. After studying, you will be given a random picture. You will be asked to write down the numbers that go with them.",
-        "Instruction": "For the question below: Please write down the number that you can remember in the following JSON format: {\"answers\": \"a_number\"}.",
+        "Instruction": "For the question below: Please write down the number that you can remember in the following JSON format: {\"answer\": \"a_number\"}.",
         "Answers": [
             [
                 "49"
@@ -16094,7 +16094,7 @@
             ]
         ],
         "Description": "This is a test of your ability to remember a group of shapes and their positions in relation to each other. You will be given a picture of different shapes to study. After you learn the shapes and their orientation, you will be given another picture and asked whether it is the same as part of the shapes in the first picture or whether it is different from those.",
-        "Instruction": "Remember the test pictures will show only a small part of the picture that was studied. Answer Y for pictures that show the same shapes in the same orientation as on the study picture. Answer N for pictures that show different shapes. For the question below: Please answer in the following JSON format: {\"answers\": \"Y_or_N\"}.",
+        "Instruction": "Remember the test pictures will show only a small part of the picture that was studied. Answer Y for pictures that show the same shapes in the same orientation as on the study picture. Answer N for pictures that show different shapes. For the question below: Please answer in the following JSON format: {\"answer\": \"Y_or_N\"}.",
         "Answers": [
             [
                 "Y"
@@ -16366,7 +16366,7 @@
             ]
         ],
         "Description": "This is a test of your ability to remember the position of things on a street map. You will be given a map with streets and buildings and other structures to study. After you learn the street layout and the different kinds of structures, you will be given an empty street map and a picture of a structure. You will be asked where the structure was located on the study map.",
-        "Instruction": "For the question below: Please answer in the following JSON format: {\"answers\": \"yes_or_no\"}.",
+        "Instruction": "For the question below: Please answer in the following JSON format: {\"answer\": \"yes_or_no\"}.",
         "Answers": [
             [
                 "yes"
@@ -19891,7 +19891,7 @@
             ]
         ],
         "Description": "This is a test of your ability to remember part of a map so that you can recognize it when you see it again. You will be given a picture of different maps to study. After you learn them, you will be given another map and asked whether it is one of the maps in the first picture.",
-        "Instruction": "For each new map, answer Y (Yes) for those you have seen, N (No) for those you have not seen before. For the question below: Please answer in the following JSON format: {\"answers\": \"Y_or_N\"}.",
+        "Instruction": "For each new map, answer Y (Yes) for those you have seen, N (No) for those you have not seen before. For the question below: Please answer in the following JSON format: {\"answer\": \"Y_or_N\"}.",
         "Answers": [
             [
                 "N"
@@ -20134,7 +20134,7 @@
             ]
         ],
         "Description": "Sometimes the relationships among groups of things are best explained by diagrams that consist of overlapping circles.",
-        "Instruction": "Each question in this test names three groups of things. You are to decide whether the given diagram shows the correct relationships among the three groups of things in each question. If the diagram correctly shows the relationships, answer \"yes\", otherwise, answer \"no\". For the question below: Please answer in the following JSON format: {\"answers\": \"yes_or_no\"}.",
+        "Instruction": "Each question in this test names three groups of things. You are to decide whether the given diagram shows the correct relationships among the three groups of things in each question. If the diagram correctly shows the relationships, answer \"yes\", otherwise, answer \"no\". For the question below: Please answer in the following JSON format: {\"answer\": \"yes_or_no\"}.",
         "Answers": [
             [
                 "yes."
