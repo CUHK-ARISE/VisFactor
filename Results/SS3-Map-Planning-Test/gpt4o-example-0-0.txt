@@ -1,7 +1,0 @@
-{'model': 'gpt-4o-2024-11-20', 'messages': [
-    {'role': 'system', 'content': 'You are a helpful assistant.'}, 
-    {'role': 'user', 'content': [
-        {'type': 'text', 'text': 'This is a test of your ability to find the shortest route between two places as quickly as possible. The figure in each test is a map of a city. The dark lines are streets. The circles are road-blocks, and you cannot pass at the places where there are circles. The numbered squares are buildings. \\Rules: 1. The shortest route will always pass along the side of one and only one of the numbered buildings. 2. A building is not considered as having been passed if a route passes only a corner and not a side. 3. The same numbered building may be used on more than one route. You are to find the shortest route between two lettered points. The number on the building passed is your answer.'}, 
-        {'type': 'text', 'text': 'For the question below: Answer the number of buildings that the shortest route passes. Please provide your answer in the following JSON format: {"answer": "a_number"}.'},
-        {'type': 'image_url', 'image_url': {'url': 'Images/SS3-Map-Planning-Test/Question/1.jpg'}, 'Reversed': False}, 
-        {'type': 'text', 'text': 'How many buildings does the shortest route from F to I pass?'}]}], 'temperature': 0.0, 'max_tokens': 3000}
