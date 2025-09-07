@@ -84,7 +84,7 @@ pip install -r requirements.txt
 #### Standard Evaluation
 
 ```bash
-python3 run.py --model GeminiPro2-5 --verbose
+python3 run.py --data VisFactor --model GeminiPro2-5 --verbose
 ```
 
 #### Chain-of-Thought (CoT) Evaluation
