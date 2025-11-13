@@ -227,6 +227,11 @@ class OpenAIWrapper(BaseAPI):
             payload.pop('n')
             payload['reasoning_effort'] = 'high'
 
+        if 'gpt-5.1' in self.model:
+            payload.pop('max_tokens')
+            payload.pop('n')
+            payload['reasoning_effort'] = 'none'
+
         response = requests.post(
             self.api_base,
             headers=headers, data=json.dumps(payload), timeout=self.timeout * 1.1)
