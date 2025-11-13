@@ -179,6 +179,15 @@ api_models = {
         retry=10,
         verbose=False,
     ),
+    "GPT5MINI": partial(
+        GPT4V,
+        model="gpt-5-mini-2025-08-07",
+        temperature=0,
+        img_size=-1,
+        img_detail="high",
+        retry=10,
+        verbose=False,
+    ),
     "GPT4o_20240806": partial(
         GPT4V,
         model="gpt-4o-2024-08-06",
