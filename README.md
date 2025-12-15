@@ -124,7 +124,7 @@ python3 generate_images.py
 
 If you find VisFactor useful in your research, please cite our paper:
 
-```bibtex
+```
 @article{huang2025human,
   title={Human Cognitive Benchmarks Reveal Foundational Visual Gaps in MLLMs},
   author={Huang, Jen-Tse and Dai, Dasen and Huang, Jen-Yuan and Yuan, Youliang and Liu, Xiaoyuan and Wang, Wenxuan and Jiao, Wenxiang and He, Pinjia and Tu, Zhaopeng and Duan, Haodong},
