@@ -1,5 +1,7 @@
 # Human Cognitive Benchmarks Reveal Foundational Visual Gaps in MLLMs
 
+[![arXiv](https://img.shields.io/badge/arXiv-2502.16435-b31b1b.svg)](https://arxiv.org/abs/2502.16435)
+
 ## 👁️Overview
 
 This repository contains the official implementation of **VisFactor**, a novel benchmark derived from the Factor-Referenced Cognitive Test (FRCT) that digitizes 20 vision-centric subtests from established cognitive psychology assessments. Our work systematically investigates the gap between human visual cognition and state-of-the-art Multimodal Large Language Models (MLLMs).
@@ -25,7 +27,7 @@ This repository contains the official implementation of **VisFactor**, a novel b
 ### Installation
 
 ```bash
-git clone https://anonymous.4open.science/r/VisFactor-NeurIPS-ED-2026.git
+git clone https://github.com/CUHK-ARISE/VisFactor.git
 cd VisFactor
 pip install -r requirements.txt
 ```
@@ -116,4 +118,17 @@ Place your images in this folder, then run the script to generate new questions:
 ```bash
 cd visfactor
 python3 generate_images.py
+```
+
+## 📄 Citation
+
+If you find VisFactor useful in your research, please cite our paper:
+
+```
+@article{huang2025human,
+  title={Human Cognitive Benchmarks Reveal Foundational Visual Gaps in MLLMs},
+  author={Huang, Jen-Tse and Dai, Dasen and Huang, Jen-Yuan and Yuan, Youliang and Liu, Xiaoyuan and Wang, Wenxuan and Jiao, Wenxiang and He, Pinjia and Tu, Zhaopeng and Duan, Haodong},
+  journal={arXiv preprint arXiv:2502.16435},
+  year={2025}
+}
 ```
